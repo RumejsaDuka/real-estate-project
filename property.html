@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harborview Waterfront Villa - RealEstate</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">R</span>
+        <span class="logo-text">RealEstate</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="listings.html" class="nav-link">Listings</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="property-main">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-bar">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
+          <a href="listings.html" class="breadcrumb-link">Listings</a>
+          <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
+          <span class="breadcrumb-current">Harborview Waterfront Villa</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- PROPERTY HEADER -->
+    <section class="property-header-section">
+      <div class="container">
+        <div class="property-header">
+          <div class="property-header-left">
+            <div class="property-badges">
+              <span class="prop-badge prop-badge-luxury">Luxury</span>
+              <span class="prop-badge prop-badge-status">For Sale</span>
+            </div>
+            <h1 class="property-title">Harborview Waterfront Villa</h1>
+            <p class="property-address">
+              <i class="fas fa-map-marker-alt"></i>
+              1820 Biscayne Bay Drive, Miami, Florida 33131
+            </p>
+            <div class="property-quick-stats">
+              <div class="quick-stat">
+                <i class="fas fa-bed"></i>
+                <span class="qs-value">6</span>
+                <span class="qs-label">Bedrooms</span>
+              </div>
+              <div class="qs-divider"></div>
+              <div class="quick-stat">
+                <i class="fas fa-bath"></i>
+                <span class="qs-value">5</span>
+                <span class="qs-label">Bathrooms</span>
+              </div>
+              <div class="qs-divider"></div>
+              <div class="quick-stat">
+                <i class="fas fa-vector-square"></i>
+                <span class="qs-value">5,100</span>
+                <span class="qs-label">Sqft</span>
+              </div>
+              <div class="qs-divider"></div>
+              <div class="quick-stat">
+                <i class="fas fa-car"></i>
+                <span class="qs-value">3</span>
+                <span class="qs-label">Garage</span>
+              </div>
+            </div>
+          </div>
+          <div class="property-header-right">
+            <div class="property-price-block">
+              <span class="price-label">Asking Price</span>
+              <div class="property-price">$1,250,000</div>
+              <span class="price-per-sqft">$245 / sqft</span>
+            </div>
+            <div class="property-actions">
+              <button class="action-btn" id="btnSave" aria-label="Save property">
+                <i class="far fa-heart"></i>
+                <span>Save</span>
+              </button>
+              <button class="action-btn" id="btnShare" aria-label="Share property">
+                <i class="fas fa-share-nodes"></i>
+                <span>Share</span>
+              </button>
+              <button class="action-btn" id="btnPrint" aria-label="Print listing">
+                <i class="fas fa-print"></i>
+                <span>Print</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery-section">
+      <div class="container">
+        <div class="gallery-layout">
+
+          <!-- Main image -->
+          <div class="gallery-main" id="galleryMain">
+            <img
+              src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&q=85"
+              alt="Harborview Villa - Front Exterior"
+              class="gallery-main-img"
+              id="galleryMainImg"
+            />
+            <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous image">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next image">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="gallery-expand" id="galleryExpand" aria-label="View full screen">
+              <i class="fas fa-expand"></i>
+              <span>View All Photos</span>
+            </button>
+            <span class="gallery-counter" id="galleryCounter">1 / 5</span>
+          </div>
+
+          <!-- Thumbnail strip -->
+          <div class="gallery-thumbs" id="galleryThumbs">
+            <button
+              class="gallery-thumb active"
+              data-index="0"
+              data-alt="Front Exterior"
+              aria-label="Photo 1: Front Exterior"
+            >
+              <img src="images/kitchen.webp" alt="Front Exterior" loading="lazy" />
+            </button>
+            <button
+              class="gallery-thumb"
+              data-index="1"
+              data-alt="Living Room"
+              aria-label="Photo 2: Living Room"
+            >
+              <img src="images/salom.jpg" alt="Living Room" loading="lazy" />
+            </button>
+            <button
+              class="gallery-thumb"
+              data-index="3"
+              data-alt="Master Bedroom"
+              aria-label="Photo 4: Master Bedroom"
+            >
+              <img src="images/bedroom.jpg" alt="Master Bedroom" loading="lazy" />
+            </button>
+            <button
+              class="gallery-thumb"
+              data-index="4"
+              data-src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=1200&q=85"
+              data-alt="Outdoor Pool"
+              aria-label="Photo 5: Outdoor Pool"
+            >
+              <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=300&q=70" alt="Outdoor Pool" loading="lazy" />
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery lightbox">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+        <i class="fas fa-xmark"></i>
+      </button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="lightbox-stage">
+        <img src="" alt="" class="lightbox-img" id="lightboxImg" />
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="lightbox-dots" id="lightboxDots"></div>
+    </div>
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+
+    <!-- MAIN CONTENT + SIDEBAR -->
+    <section class="property-body-section">
+      <div class="container">
+        <div class="property-layout">
+
+          <!-- LEFT: Main Content -->
+          <div class="property-content">
+
+            <!-- TABS -->
+            <div class="prop-tabs" id="propTabs">
+              <button class="prop-tab active" data-tab="overview">Overview</button>
+              <button class="prop-tab" data-tab="features">Features</button>
+              <button class="prop-tab" data-tab="floorplan">Floor Plan</button>
+              <button class="prop-tab" data-tab="location">Location</button>
+            </div>
+
+            <!-- TAB: Overview -->
+            <div class="prop-tab-panel active" id="tab-overview">
+
+              <div class="prop-section">
+                <h2 class="prop-section-title">Property Overview</h2>
+                <div class="overview-grid">
+                  <div class="overview-item">
+                    <span class="ov-label">Property Type</span>
+                    <span class="ov-value">Single Family Villa</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">Year Built</span>
+                    <span class="ov-value">2018</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">Lot Size</span>
+                    <span class="ov-value">0.42 Acres</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">Garage</span>
+                    <span class="ov-value">3-Car Attached</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">Heating</span>
+                    <span class="ov-value">Central HVAC</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">Cooling</span>
+                    <span class="ov-value">Central Air</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">Pool</span>
+                    <span class="ov-value">Private Outdoor</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">HOA Fees</span>
+                    <span class="ov-value">$420 / month</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">Property Tax</span>
+                    <span class="ov-value">$14,200 / yr</span>
+                  </div>
+                  <div class="overview-item">
+                    <span class="ov-label">MLS Number</span>
+                    <span class="ov-value">MLS-20249871</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="prop-section">
+                <h2 class="prop-section-title">About This Property</h2>
+                <div class="prop-description">
+                  <p>
+                    Nestled along the shimmering shores of Biscayne Bay, this extraordinary waterfront villa
+                    redefines luxury coastal living. From the moment you arrive, the grand entry with soaring
+                    ceilings and floor-to-ceiling windows framing unobstructed bay views sets the tone for an
+                    exceptional residence.
+                  </p>
+                  <p>
+                    The open-plan main level seamlessly connects a chef-caliber kitchen — outfitted with
+                    sub-zero appliances, custom cabinetry, and an oversized marble island — to a light-flooded
+                    living room and formal dining space. Sliding glass walls dissolve the boundary between indoor
+                    and outdoor entertaining, leading to an expansive wraparound terrace, a resort-style heated
+                    pool, and a private boat dock below.
+                  </p>
+                  <p>
+                    The upper floor hosts four en-suite bedrooms including a sprawling primary suite with
+                    dual walk-in closets, a spa bathroom with a freestanding soaking tub, and a private
+                    balcony overlooking the water. Two additional guest suites occupy the ground level,
+                    ideal for staff or extended family. Smart home technology controls lighting, security,
+                    climate, and audio throughout the entire property.
+                  </p>
+                  <p class="prop-description-more" id="descMore">
+                    Additional highlights include a private home cinema, a glass-enclosed wine cellar, a
+                    fitness room, and a rooftop observation deck with 360-degree panoramic views of the
+                    Miami skyline and bay. The three-car garage features epoxy flooring and EV charging
+                    stations. Located minutes from world-class dining, Brickell City Centre, and Miami
+                    International Airport, this property represents the pinnacle of South Florida
+                    waterfront living.
+                  </p>
+                  <button class="read-more-btn" id="readMoreBtn">
+                    Read More <i class="fas fa-chevron-down"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- TAB: Features -->
+            <div class="prop-tab-panel" id="tab-features">
+              <div class="prop-section">
+                <h2 class="prop-section-title">Features and Amenities</h2>
+
+                <div class="features-group">
+                  <h3 class="features-group-title">
+                    <i class="fas fa-home"></i> Interior
+                  </h3>
+                  <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 6 spacious bedrooms, all with en-suite baths</li>
+                    <li><i class="fas fa-check"></i> Chef kitchen with Sub-Zero and Wolf appliances</li>
+                    <li><i class="fas fa-check"></i> Marble and hardwood flooring throughout</li>
+                    <li><i class="fas fa-check"></i> Floor-to-ceiling bay-view windows</li>
+                    <li><i class="fas fa-check"></i> Private home cinema (12 seats)</li>
+                    <li><i class="fas fa-check"></i> Glass-enclosed wine cellar (500 bottle capacity)</li>
+                    <li><i class="fas fa-check"></i> Dedicated fitness room</li>
+                    <li><i class="fas fa-check"></i> Smart home automation system (Crestron)</li>
+                    <li><i class="fas fa-check"></i> Formal living and dining rooms</li>
+                    <li><i class="fas fa-check"></i> Butler's pantry and laundry room</li>
+                  </ul>
+                </div>
+
+                <div class="features-group">
+                  <h3 class="features-group-title">
+                    <i class="fas fa-sun"></i> Exterior and Outdoor
+                  </h3>
+                  <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Heated infinity pool and spa</li>
+                    <li><i class="fas fa-check"></i> Private boat dock with lift</li>
+                    <li><i class="fas fa-check"></i> Wraparound terrace with summer kitchen</li>
+                    <li><i class="fas fa-check"></i> Rooftop observation deck</li>
+                    <li><i class="fas fa-check"></i> Professionally landscaped grounds</li>
+                    <li><i class="fas fa-check"></i> 3-car garage with EV charging stations</li>
+                  </ul>
+                </div>
+
+                <div class="features-group">
+                  <h3 class="features-group-title">
+                    <i class="fas fa-shield-halved"></i> Security and Technology
+                  </h3>
+                  <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Gated entry with intercom system</li>
+                    <li><i class="fas fa-check"></i> 24-camera CCTV surveillance</li>
+                    <li><i class="fas fa-check"></i> Smart locks on all exterior doors</li>
+                    <li><i class="fas fa-check"></i> Whole-home generator backup</li>
+                    <li><i class="fas fa-check"></i> Hurricane-impact rated windows and doors</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- TAB: Floor Plan -->
+            <div class="prop-tab-panel" id="tab-floorplan">
+              <div class="prop-section">
+                <h2 class="prop-section-title">Floor Plan</h2>
+                <div class="floorplan-selector">
+                  <button class="fp-level-btn active" data-level="ground">Ground Floor</button>
+                  <button class="fp-level-btn" data-level="upper">Upper Floor</button>
+                  <button class="fp-level-btn" data-level="roof">Rooftop</button>
+                </div>
+                <div class="floorplan-visual">
+                  <div class="floorplan-placeholder" id="floorplanDisplay">
+                    <div class="fp-diagram" id="fpDiagram">
+
+                      <!-- Ground floor room grid (SVG-free CSS layout) -->
+                      <div class="fp-room fp-room-large" style="grid-column: 1 / 3; grid-row: 1 / 2;">
+                        <span class="fp-room-name">Living Room</span>
+                        <span class="fp-room-size">820 sqft</span>
+                      </div>
+                      <div class="fp-room" style="grid-column: 3 / 4; grid-row: 1 / 2;">
+                        <span class="fp-room-name">Kitchen</span>
+                        <span class="fp-room-size">420 sqft</span>
+                      </div>
+                      <div class="fp-room" style="grid-column: 1 / 2; grid-row: 2 / 3;">
+                        <span class="fp-room-name">Dining Room</span>
+                        <span class="fp-room-size">360 sqft</span>
+                      </div>
+                      <div class="fp-room" style="grid-column: 2 / 3; grid-row: 2 / 3;">
+                        <span class="fp-room-name">Guest Suite 1</span>
+                        <span class="fp-room-size">280 sqft</span>
+                      </div>
+                      <div class="fp-room" style="grid-column: 3 / 4; grid-row: 2 / 3;">
+                        <span class="fp-room-name">Guest Suite 2</span>
+                        <span class="fp-room-size">280 sqft</span>
+                      </div>
+                      <div class="fp-room fp-room-accent" style="grid-column: 1 / 2; grid-row: 3 / 4;">
+                        <span class="fp-room-name">Garage</span>
+                        <span class="fp-room-size">680 sqft</span>
+                      </div>
+                      <div class="fp-room" style="grid-column: 2 / 3; grid-row: 3 / 4;">
+                        <span class="fp-room-name">Cinema</span>
+                        <span class="fp-room-size">340 sqft</span>
+                      </div>
+                      <div class="fp-room" style="grid-column: 3 / 4; grid-row: 3 / 4;">
+                        <span class="fp-room-name">Wine Cellar</span>
+                        <span class="fp-room-size">160 sqft</span>
+                      </div>
+
+                    </div>
+                    <p class="fp-note">Diagram is illustrative. Actual dimensions may vary.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: Location -->
+            <div class="prop-tab-panel" id="tab-location">
+              <div class="prop-section">
+                <h2 class="prop-section-title">Location</h2>
+                <p class="prop-location-intro">
+                  1820 Biscayne Bay Drive, Miami, FL 33131. Situated in the prestigious
+                  Brickell neighborhood, steps from world-class dining and Biscayne Bay.
+                </p>
+                <div class="map-placeholder">
+                  <i class="fas fa-map-location-dot map-placeholder-icon"></i>
+                  <p class="map-placeholder-text">Interactive map</p>
+                  <p class="map-placeholder-sub">1820 Biscayne Bay Drive, Miami, FL 33131</p>
+                  <a
+                    href="https://maps.google.com/?q=1820+Biscayne+Bay+Drive+Miami+FL"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-navy map-open-btn"
+                  >
+                    Open in Google Maps
+                  </a>
+                </div>
+                <div class="nearby-grid">
+                  <div class="nearby-item">
+                    <i class="fas fa-graduation-cap nearby-icon"></i>
+                    <div>
+                      <span class="nearby-name">Brickell Preparatory</span>
+                      <span class="nearby-dist">0.4 mi</span>
+                    </div>
+                  </div>
+                  <div class="nearby-item">
+                    <i class="fas fa-store nearby-icon"></i>
+                    <div>
+                      <span class="nearby-name">Brickell City Centre</span>
+                      <span class="nearby-dist">0.7 mi</span>
+                    </div>
+                  </div>
+                  <div class="nearby-item">
+                    <i class="fas fa-hospital nearby-icon"></i>
+                    <div>
+                      <span class="nearby-name">Brickell Medical Centre</span>
+                      <span class="nearby-dist">1.1 mi</span>
+                    </div>
+                  </div>
+                  <div class="nearby-item">
+                    <i class="fas fa-train-subway nearby-icon"></i>
+                    <div>
+                      <span class="nearby-name">Brickell Metrorail</span>
+                      <span class="nearby-dist">0.9 mi</span>
+                    </div>
+                  </div>
+                  <div class="nearby-item">
+                    <i class="fas fa-utensils nearby-icon"></i>
+                    <div>
+                      <span class="nearby-name">Fine Dining District</span>
+                      <span class="nearby-dist">0.3 mi</span>
+                    </div>
+                  </div>
+                  <div class="nearby-item">
+                    <i class="fas fa-plane nearby-icon"></i>
+                    <div>
+                      <span class="nearby-name">Miami Intl Airport</span>
+                      <span class="nearby-dist">8.2 mi</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Sidebar -->
+          <aside class="property-sidebar" id="propertySidebar">
+
+            <!-- Agent Card -->
+            <div class="sidebar-card agent-card">
+              <div class="agent-top">
+                <img
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80"
+                  alt="James Harrington - Listing Agent"
+                  class="agent-avatar"
+                />
+                <div class="agent-info">
+                  <p class="agent-role">Your Agent</p>
+                  <h3 class="agent-name">James Harrington</h3>
+                  <p class="agent-title">Senior Property Specialist</p>
+                  <div class="agent-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="rating-count">(128 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="agent-contact-btns">
+                <a href="tel:+13105550192" class="agent-btn agent-btn-phone">
+                  <i class="fas fa-phone"></i> (310) 555-0192
+                </a>
+                <a href="contact.html" class="agent-btn agent-btn-email">
+                  <i class="fas fa-envelope"></i> Send Message
+                </a>
+              </div>
+            </div>
+
+            <!-- Schedule Tour Form -->
+            <div class="sidebar-card tour-card">
+              <h3 class="sidebar-card-title">
+                <i class="fas fa-calendar-check"></i>
+                Schedule a Tour
+              </h3>
+              <div class="tour-type-toggle">
+                <button class="tour-type-btn active" data-type="in-person">In-Person</button>
+                <button class="tour-type-btn" data-type="virtual">Virtual Tour</button>
+              </div>
+              <div class="tour-form">
+                <div class="form-field">
+                  <label class="form-label" for="tourName">Full Name</label>
+                  <input class="form-input" type="text" id="tourName" placeholder="Your full name" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="tourEmail">Email Address</label>
+                  <input class="form-input" type="email" id="tourEmail" placeholder="your@email.com" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="tourPhone">Phone Number</label>
+                  <input class="form-input" type="tel" id="tourPhone" placeholder="+1 (555) 000-0000" />
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label" for="tourDate">Preferred Date</label>
+                    <input class="form-input" type="date" id="tourDate" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="tourTime">Preferred Time</label>
+                    <select class="form-input form-select" id="tourTime">
+                      <option value="">Select time</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-gold tour-submit-btn" id="tourSubmitBtn">
+                  Request Tour
+                </button>
+                <p class="tour-notice">
+                  <i class="fas fa-lock"></i>
+                  Your information is private and secure.
+                </p>
+              </div>
+              <div class="tour-success" id="tourSuccess">
+                <i class="fas fa-circle-check tour-success-icon"></i>
+                <p class="tour-success-msg">Your tour request has been sent. James will contact you within 24 hours.</p>
+              </div>
+            </div>
+
+            <!-- Mortgage Calculator -->
+            <div class="sidebar-card mortgage-card">
+              <h3 class="sidebar-card-title">
+                <i class="fas fa-calculator"></i>
+                Mortgage Calculator
+              </h3>
+              <div class="mortgage-fields">
+                <div class="form-field">
+                  <label class="form-label" for="mortgagePrice">Home Price ($)</label>
+                  <input class="form-input" type="number" id="mortgagePrice" value="1250000" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="mortgageDown">Down Payment ($)</label>
+                  <input class="form-input" type="number" id="mortgageDown" value="250000" />
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label" for="mortgageRate">Interest Rate (%)</label>
+                    <input class="form-input" type="number" id="mortgageRate" value="6.8" step="0.1" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="mortgageTerm">Term (years)</label>
+                    <select class="form-input form-select" id="mortgageTerm">
+                      <option value="30" selected>30 years</option>
+                      <option value="20">20 years</option>
+                      <option value="15">15 years</option>
+                      <option value="10">10 years</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="mortgage-result" id="mortgageResult">
+                <div class="mortgage-monthly">
+                  <span class="mortgage-monthly-label">Estimated Monthly Payment</span>
+                  <span class="mortgage-monthly-amount" id="mortgageMonthly">$6,537</span>
+                </div>
+                <div class="mortgage-breakdown">
+                  <div class="breakdown-row">
+                    <span>Principal and Interest</span>
+                    <span id="brkPI">$6,537</span>
+                  </div>
+                  <div class="breakdown-row">
+                    <span>Property Tax (est.)</span>
+                    <span>$1,183</span>
+                  </div>
+                  <div class="breakdown-row">
+                    <span>HOA</span>
+                    <span>$420</span>
+                  </div>
+                  <div class="breakdown-row breakdown-total">
+                    <span>Total Monthly</span>
+                    <span id="brkTotal">$8,140</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMILAR PROPERTIES -->
+    <section class="similar-section">
+      <div class="container">
+        <div class="section-header similar-header">
+          <p class="section-eyebrow">You May Also Like</p>
+          <h2 class="section-title">Similar Properties</h2>
+        </div>
+        <div class="similar-grid">
+
+          <article class="property-card" data-index="0">
+            <div class="card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Oakwood Estates" class="card-image" loading="lazy" />
+              <span class="card-badge badge-luxury">Luxury</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$975,000</div>
+              <h3 class="card-title">Oceanview Contemporary Estate</h3>
+              <p class="card-location"><i class="fas fa-map-marker-alt"></i> Fort Lauderdale, FL</p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 5 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 4 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 4,200 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+          <article class="property-card" data-index="1">
+            <div class="card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Palm Beach Villa" class="card-image" loading="lazy" />
+              <span class="card-badge badge-luxury">Luxury</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$1,490,000</div>
+              <h3 class="card-title">Palm Beach Poolside Retreat</h3>
+              <p class="card-location"><i class="fas fa-map-marker-alt"></i> Palm Beach, FL</p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 7 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 6 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 6,300 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+          <article class="property-card" data-index="2">
+            <div class="card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="Coral Gables Home" class="card-image" loading="lazy" />
+              <span class="card-badge badge-new">New</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$860,000</div>
+              <h3 class="card-title">Coral Gables Garden Home</h3>
+              <p class="card-location"><i class="fas fa-map-marker-alt"></i> Coral Gables, FL</p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 5 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 4 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 3,800 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+        </div>
+        <div class="similar-cta">
+          <a href="listings.html" class="btn btn-navy">View All Listings</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <span class="logo-icon">R</span>
+            <span class="logo-text">RealEstate</span>
+          </a>
+          <p class="footer-tagline">Your trusted partner in finding the perfect property since 2009.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="listings.html" class="footer-link">All Listings</a></li>
+            <li><a href="blog.html" class="footer-link">Blog</a></li>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Property Types</h4>
+          <ul class="footer-links">
+            <li><a href="listings.html" class="footer-link">Single Family Homes</a></li>
+            <li><a href="listings.html" class="footer-link">Condos and Apartments</a></li>
+            <li><a href="listings.html" class="footer-link">Townhouses</a></li>
+            <li><a href="listings.html" class="footer-link">Luxury Estates</a></li>
+            <li><a href="listings.html" class="footer-link">Commercial</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+              <span>1420 Harbor Blvd, Suite 300<br />Los Angeles, CA 90012</span>
+            </li>
+            <li>
+              <i class="fas fa-phone footer-contact-icon"></i>
+              <span>(310) 555-0192</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope footer-contact-icon"></i>
+              <span>hello@realestate.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">2025 RealEstate. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          <a href="#" class="footer-bottom-link">Terms of Service</a>
+          <a href="#" class="footer-bottom-link">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

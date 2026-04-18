@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grand Realty - Find Your Dream Home</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">G</span>
+        <span class="logo-text">Grand Realty</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="listings.html" class="nav-link">Listings</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-bg">
+        <img
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=80"
+          alt="Luxury home exterior"
+          class="hero-image"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Premium Properties</p>
+        <h1 class="hero-title">Find Your<br /><span class="hero-accent">Dream Home</span></h1>
+        <p class="hero-subtitle">Discover handpicked properties tailored to your lifestyle and ambitions.</p>
+        <div class="search-bar" id="searchBar">
+          <div class="search-field">
+            <label class="search-label" for="location">Location</label>
+            <input class="search-input" type="text" id="location" placeholder="City, neighborhood, or ZIP..." />
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-field">
+            <label class="search-label" for="price">Max Price</label>
+            <select class="search-input search-select" id="price">
+              <option value="">Any price</option>
+              <option value="250000">Up to $250,000</option>
+              <option value="500000">Up to $500,000</option>
+              <option value="750000">Up to $750,000</option>
+              <option value="1000000">Up to $1,000,000</option>
+              <option value="2000000">Up to $2,000,000</option>
+            </select>
+          </div>
+          <button class="search-btn" id="searchBtn">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </button>
+        </div>
+      </div>
+      <div class="hero-scroll-indicator">
+        <span class="scroll-line"></span>
+        <span class="scroll-text">Scroll</span>
+      </div>
+    </section>
+
+    <!-- FEATURED PROPERTIES -->
+    <section class="featured-section" id="featured">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Handpicked for You</p>
+          <h2 class="section-title">Featured Properties</h2>
+          <p class="section-subtitle">A curated selection of our finest available homes across the country.</p>
+        </div>
+
+        <div class="properties-grid">
+
+          <!-- Card 1 -->
+          <article class="property-card" data-index="0">
+            <div class="card-image-wrap">
+              <img
+                src="images/maple.jpg"
+                alt="Modern family home"
+                class="card-image"
+                loading="lazy"
+              />
+              <span class="card-badge">For Sale</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$485,000</div>
+              <h3 class="card-title">Maple Ridge Family Home</h3>
+              <p class="card-location">
+                <i class="fas fa-map-marker-alt"></i> Austin, Texas
+              </p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 4 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 3 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 2,340 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="property-card featured-large" data-index="1">
+            <div class="card-image-wrap">
+              <img
+                src="images/waterfront.jpg"
+                alt="Luxury waterfront villa"
+                class="card-image"
+                loading="lazy"
+              />
+              <span class="card-badge badge-luxury">Luxury</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$1,250,000</div>
+              <h3 class="card-title">Harborview Waterfront Villa</h3>
+              <p class="card-location">
+                <i class="fas fa-map-marker-alt"></i> Miami, Florida
+              </p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 6 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 5 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 5,100 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="property-card" data-index="2">
+            <div class="card-image-wrap">
+              <img
+                src="images/townhouse.webp"
+                alt="Contemporary townhouse"
+                class="card-image"
+                loading="lazy"
+              />
+              <span class="card-badge badge-new">New</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$310,000</div>
+              <h3 class="card-title">Westside Contemporary Townhouse</h3>
+              <p class="card-location">
+                <i class="fas fa-map-marker-alt"></i> Denver, Colorado
+              </p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 3 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 2 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 1,780 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="property-card" data-index="3">
+            <div class="card-image-wrap">
+              <img
+                src="images/oakwood.jpg"
+                alt="Suburban family home"
+                class="card-image"
+                loading="lazy"
+              />
+              <span class="card-badge">For Sale</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$675,000</div>
+              <h3 class="card-title">Oakwood Estates Residence</h3>
+              <p class="card-location">
+                <i class="fas fa-map-marker-alt"></i> Nashville, Tennessee
+              </p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 5 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 4 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 3,620 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="property-card" data-index="4">
+            <div class="card-image-wrap">
+              <img
+                src="images/mountain.jpg"
+                alt="Mountain retreat cabin"
+                class="card-image"
+                loading="lazy"
+              />
+              <span class="card-badge badge-reduced">Reduced</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$540,000</div>
+              <h3 class="card-title">Summit Mountain Retreat</h3>
+              <p class="card-location">
+                <i class="fas fa-map-marker-alt"></i> Aspen, Colorado
+              </p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 4 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 3 Baths</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 2,890 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="property-card" data-index="5">
+            <div class="card-image-wrap">
+              <img
+                src="images/loft.avif"
+                alt="Modern city apartment"
+                class="card-image"
+                loading="lazy"
+              />
+              <span class="card-badge badge-new">New</span>
+              <div class="card-overlay">
+                <a href="property.html" class="card-overlay-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-price">$228,000</div>
+              <h3 class="card-title">Downtown Loft Apartment</h3>
+              <p class="card-location">
+                <i class="fas fa-map-marker-alt"></i> Chicago, Illinois
+              </p>
+              <div class="card-meta">
+                <span class="meta-item"><i class="fas fa-bed"></i> 2 Beds</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 1 Bath</span>
+                <span class="meta-sep"></span>
+                <span class="meta-item"><i class="fas fa-vector-square"></i> 1,100 sqft</span>
+              </div>
+              <a href="property.html" class="card-btn">View Details</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+      <div class="cta-bg">
+        <img
+          src="images/agent.webp"
+          alt="Aerial view of neighborhood"
+          class="cta-image"
+        />
+        <div class="cta-overlay"></div>
+      </div>
+      <div class="container cta-content">
+        <div class="cta-inner">
+          <p class="section-eyebrow" style="color: var(--gold);">Ready to Move?</p>
+          <h2 class="cta-title">Explore All Available<br />Properties</h2>
+          <p class="cta-subtitle">Browse our complete portfolio of over 1,200 listings across the country. Your perfect home is waiting.</p>
+          <div class="cta-actions">
+            <a href="listing.html" class="btn btn-gold">Browse All Listings</a>
+            <a href="contact.html" class="btn btn-outline-white">Talk to an Agent</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <span class="logo-icon">G</span>
+            <span class="logo-text">Grand Realty</span>
+          </a>
+          <p class="footer-tagline">Your trusted partner in finding the perfect property since 2009.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="listings.html" class="footer-link">All Listings</a></li>
+            <li><a href="blog.html" class="footer-link">Blog</a></li>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Property Types</h4>
+          <ul class="footer-links">
+            <li><a href="listings.html" class="footer-link">Single Family Homes</a></li>
+            <li><a href="listings.html" class="footer-link">Condos and Apartments</a></li>
+            <li><a href="listings.html" class="footer-link">Townhouses</a></li>
+            <li><a href="listings.html" class="footer-link">Luxury Estates</a></li>
+            <li><a href="listings.html" class="footer-link">Commercial</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+              <span>1420 Harbor Blvd, Suite 300<br />Los Angeles, CA 90012</span>
+            </li>
+            <li>
+              <i class="fas fa-phone footer-contact-icon"></i>
+              <span>(310) 555-0192</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope footer-contact-icon"></i>
+              <span>hello@grandrealty.com</span>
+            </li>
+            <li>
+              <i class="fas fa-clock footer-contact-icon"></i>
+              <span>Mon-Fri: 9am - 6pm</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">2025 Grand Realty. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          <a href="#" class="footer-bottom-link">Terms of Service</a>
+          <a href="#" class="footer-bottom-link">Sitemap</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
