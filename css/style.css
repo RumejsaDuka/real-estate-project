@@ -45,7 +45,7 @@ ul{list-style:none}
 .nav-container{max-width:1240px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-icon{width:36px;height:36px;background:var(--gold);color:var(--navy-dark);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:1.1rem;flex-shrink:0}
-.logo-text{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--white);letter-spacing:.01em;transition:color var(--transition)}
+.logo-text{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--gold);letter-spacing:.01em;transition:color var(--transition)}
 .navbar.scrolled .logo-text{color:var(--navy)}
 .nav-links{display:flex;align-items:center;gap:8px}
 .nav-link{font-size:.85rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.88);padding:8px 14px;border-radius:var(--radius-sm);transition:all var(--transition);position:relative}
