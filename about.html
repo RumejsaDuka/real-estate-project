@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us</title>
+<link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="listings.html">Listings</a>
+<a href="property.html">Property</a>
+<a href="contact.html">Contact</a>
+<a href="about.html" class="active">About</a>
+</nav>
+
+<header>
+<h1>About Us</h1>
+<p>Your trusted real estate partner</p>
+</header>
+
+
+<section class="about-container">
+
+<div class="info-box">
+<h2>About Us</h2>
+<p>
+We are a professional real estate company dedicated to helping clients buy, rent and sell properties with confidence and ease.
+</p>
+</div>
+
+<div class="info-box">
+<h2>Our Mission</h2>
+<p>
+Our mission is to make finding the perfect home simple, fast and stress-free for every family.
+</p>
+</div>
+
+<div class="info-box">
+<h2>Why Choose Us?</h2>
+<p>
+✔ Trusted agents  
+✔ Affordable prices  
+✔ Luxury homes  
+✔ Friendly support
+</p>
+</div>
+
+
+</section>
+
+<h2 class="team-title">Meet Our Team</h2>
+
+<section class="team">
+
+
+<div class="card" onclick="showContact('John Smith','CEO','johnsmith@email.com','+355 69 111 1111')">
+<img src="https://randomuser.me/api/portraits/men/32.jpg">
+<h3>John Smith</h3>
+<p>CEO</p>
+</div>
+
+<div class="card" onclick="showContact('Sarah Johnson','Manager','sarah@email.com','+355 69 222 2222')">
+<img src="https://randomuser.me/api/portraits/women/44.jpg">
+<h3>Sarah Johnson</h3>
+<p>Manager</p>
+</div>
+
+<div class="card" onclick="showContact('David Brown','Agent','david@email.com','+355 69 333 3333')">
+<img src="https://randomuser.me/api/portraits/men/51.jpg">
+<h3>David Brown</h3>
+<p>Agent</p>
+</div>
+
+</section>
+
+</section>
+
+<section class="cta">
+<h2>Ready to Find Your Dream Home?</h2>
+<a href="contact.html">Contact Us</a>
+</section>
+<script>
+function showContact(name, role, email, phone){
+alert(
+"Name: " + name +
+"\nRole: " + role +
+"\nEmail: " + email +
+"\nPhone: " + phone
+);
+}
+</script>
+</body>
+</html>
