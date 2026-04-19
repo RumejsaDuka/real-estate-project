@@ -60,6 +60,25 @@ ul{list-style:none}
 .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-toggle.open span:nth-child(2){opacity:0}
 .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.navbar.inner-page{
+  background:var(--white);
+  padding:14px 0;
+  box-shadow:var(--shadow-sm);
+}.navbar.inner-page .logo-text{
+  color:var(--navy);
+}.navbar.inner-page .nav-link{
+  color:var(--text-mid);
+}
+.navbar.inner-page .nav-link:hover,
+.navbar.inner-page .nav-link.active{
+  color:var(--navy);
+}
+.navbar.inner-page .nav-toggle span{
+  background:var(--navy);
+}
+
+
+
 
 /* === HERO === */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
