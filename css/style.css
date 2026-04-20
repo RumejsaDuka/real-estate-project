@@ -1363,80 +1363,405 @@ ul{list-style:none}
   .cac-actions { flex-direction: column; }
   .cac-btn { justify-content: center; }
 }
-#chatbot {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 340px;
-  height: 460px;
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+/* about */
+/* =============================================
+   about.css — Grand Realty About Page Styles
+   ============================================= */
+
+/* ── HERO ── */
+.about-hero {
+  position: relative;
+  height: 480px;
   display: flex;
-  flex-direction: column;
-  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   overflow: hidden;
-  font-family: Arial, sans-serif;
 }
 
-#chatbot-header {
-  padding: 14px 16px;
-  background: linear-gradient(135deg, #111827, #1f2937);
-  color: white;
-  cursor: move;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+.about-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
 }
 
-#chatbot-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 14px;
-  background: #f9fafb;
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(13,27,42,0.72) 0%, rgba(13,27,42,0.52) 100%);
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding: 0 20px;
+}
+
+.about-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.about-hero-accent {
+  color: var(--gold, #c9a84c);
+}
+
+.about-hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.8);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── STORY ── */
+.story-section {
+  padding: 80px 0;
+  background: #f8f6f2;
+}
+
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.story-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.story-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #14213d;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.story-text p {
+  font-size: 0.94rem;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.story-highlights {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+  margin-top: 28px;
 }
 
-#chatbot-input {
+.story-highlight {
   display: flex;
-  gap: 8px;
-  padding: 10px;
-  background: #ffffff;
-  border-top: 1px solid #e5e7eb;
+  align-items: flex-start;
+  gap: 14px;
 }
 
-#chatInput {
-  flex: 1;
-  padding: 10px 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  outline: none;
-  font-size: 14px;
-  transition: 0.2s;
+.sh-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba(201,168,76,0.12);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold, #c9a84c);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
-#chatInput:focus {
-  border-color: #111827;
-  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.1);
+.sh-text strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #14213d;
+  margin-bottom: 3px;
 }
 
-#chatSend {
-  padding: 10px 14px;
-  background: #111827;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: 0.2s;
+.sh-text span {
+  font-size: 0.84rem;
+  color: #777;
+  line-height: 1.5;
 }
 
-#chatSend:hover {
-  background: #1f2937;
+/* ── VALUES ── */
+.values-section {
+  background: #14213d;
+  padding: 80px 0;
 }
 
-#chatSend:active {
-  transform: scale(0.96);
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-header .section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.section-header .section-subtitle {
+  font-size: 0.93rem;
+  color: rgba(255,255,255,0.6);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.value-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 32px 24px;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.09);
+}
+
+.value-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(201,168,76,0.14);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--gold, #c9a84c);
+  margin-bottom: 18px;
+}
+
+.value-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.value-card p {
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.7;
+}
+
+/* ── TEAM ── */
+.team-section {
+  padding: 80px 0;
+  background: #f8f6f2;
+}
+
+.section-title-dark {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #14213d;
+  margin-bottom: 12px;
+}
+
+.section-subtitle-dark {
+  font-size: 0.93rem;
+  color: #777;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.team-section .section-header .section-eyebrow {
+  color: var(--gold, #c9a84c);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.team-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.team-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.13);
+}
+
+.team-img-wrap {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+}
+
+.team-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.team-card:hover .team-img {
+  transform: scale(1.05);
+}
+
+.team-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13,27,42,0.55);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.team-card:hover .team-overlay {
+  opacity: 1;
+}
+
+.team-social-link {
+  width: 34px;
+  height: 34px;
+  background: var(--gold, #c9a84c);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.team-social-link:hover {
+  background: #fca311;
+}
+
+.team-body {
+  padding: 20px 16px 22px;
+}
+
+.team-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #14213d;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.team-role {
+  font-size: 0.76rem;
+  color: var(--gold, #c9a84c);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+}
+
+.team-bio {
+  font-size: 0.82rem;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* ── CTA ── */
+.about-cta {
+  position: relative;
+  padding: 100px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.about-cta-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.about-cta-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13,27,42,0.78);
+}
+
+.about-cta-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.about-cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+.about-cta-sub {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid   { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .story-layout { grid-template-columns: 1fr; gap: 36px; }
+  .story-img    { height: 280px; }
+  .about-hero   { height: 380px; }
+}
+
+@media (max-width: 540px) {
+  .values-grid { grid-template-columns: 1fr; }
+  .team-grid   { grid-template-columns: 1fr; }
 }

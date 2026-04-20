@@ -1,96 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us</title>
-<link rel="stylesheet" href="css/about.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Grand Realty</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/about.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="listings.html">Listings</a>
-<a href="property.html">Property</a>
-<a href="contact.html">Contact</a>
-<a href="about.html" class="active">About</a>
-</nav>
+  <header class="navbar inner-page" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.jpg" alt="Grand Realty Logo" class="logo-icon" />
+        <span class="logo-text">Grand Realty</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="listings.html" class="nav-link">Listings</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-<header>
-<h1>About Us</h1>
-<p>Your trusted real estate partner</p>
-</header>
+  <main>
+
+    <!-- HERO -->
+    <section class="about-hero">
+      <img src="images/abouthero.jpg" alt="Grand Realty office" class="about-hero-img" />
+      <div class="about-hero-overlay"></div>
+      <div class="about-hero-content">
+        <p class="section-eyebrow">Our Story</p>
+        <h1 class="about-hero-title">More Than a Brokerage —<br /><span class="about-hero-accent">A Trusted Partner</span></h1>
+        <p class="about-hero-sub">Since 2009, we've helped thousands of families and investors find their perfect property across America.</p>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story-section">
+      <div class="container">
+        <div class="story-layout">
+          <div class="story-img-wrap">
+            <img src="images/team.jpg" alt="Grand Realty team" class="story-img" />
+          </div>
+          <div class="story-text">
+            <p class="section-eyebrow">Who We Are</p>
+            <h2>Dedicated to Finding <em>Your</em> Perfect Home</h2>
+            <p>Grand Realty was founded in Los Angeles in 2009 with a singular vision: to bring honesty, expertise, and genuine care to every real estate transaction. What started as a small boutique agency has grown into one of the most trusted names in premium property across the country.</p>
+            <p>We specialize in luxury residential sales, investment properties, and first-time buyer guidance — offering a full-service experience from initial search to closing day and beyond.</p>
+            <div class="story-highlights">
+              <div class="story-highlight">
+                <div class="sh-icon"><i class="fas fa-handshake"></i></div>
+                <div class="sh-text">
+                  <strong>Client-First Philosophy</strong>
+                  <span>Every decision we make is guided by what's truly best for our clients.</span>
+                </div>
+              </div>
+              <div class="story-highlight">
+                <div class="sh-icon"><i class="fas fa-map"></i></div>
+                <div class="sh-text">
+                  <strong>Deep Market Knowledge</strong>
+                  <span>Our agents deliver insights you won't find anywhere online.</span>
+                </div>
+              </div>
+              <div class="story-highlight">
+                <div class="sh-icon"><i class="fas fa-shield-halved"></i></div>
+                <div class="sh-text">
+                  <strong>End-to-End Support</strong>
+                  <span>From pre-approval to moving day, we're with you every step.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">What Drives Us</p>
+          <h2 class="section-title">Our Core Values</h2>
+          <p class="section-subtitle">The principles that have guided every transaction and relationship since day one.</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-star"></i></div>
+            <h3>Excellence</h3>
+            <p>We hold ourselves to the highest standard in every aspect of our work.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-eye"></i></div>
+            <h3>Transparency</h3>
+            <p>No hidden fees, no surprises — open communication at every stage.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-heart"></i></div>
+            <h3>Integrity</h3>
+            <p>We earn your trust by doing the right thing, even when it's not the easy thing.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-users"></i></div>
+            <h3>Community</h3>
+            <p>We're deeply invested in the neighborhoods and communities we serve.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="team-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">The People Behind the Results</p>
+          <h2 class="section-title-dark">Meet Our Team</h2>
+          <p class="section-subtitle-dark">Passionate professionals who bring knowledge and care to every client relationship.</p>
+        </div>
+        <div class="team-grid">
+
+          <div class="team-card">
+            <div class="team-img-wrap">
+              <img src="images/agent2.jpg" alt="Sarah Mitchell" class="team-img" />
+              <div class="team-overlay">
+                <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="contact.html" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="team-body">
+              <div class="team-name">Sarah Mitchell</div>
+              <div class="team-role">Founding Partner & CEO</div>
+              <p class="team-bio">15+ years of experience and a passion for matching people with the homes they deserve.</p>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-img-wrap">
+              <img src="images/agent1.jpg" alt="James Harrington" class="team-img" />
+              <div class="team-overlay">
+                <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="contact.html" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="team-body">
+              <div class="team-name">James Harrington</div>
+              <div class="team-role">Senior Property Specialist</div>
+              <p class="team-bio">Luxury residential expert across Florida and California with 12 years in the field.</p>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-img-wrap">
+              <img src="images/david.jpg" alt="David Park" class="team-img" />
+              <div class="team-overlay">
+                <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="contact.html" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="team-body">
+              <div class="team-name">David Park</div>
+              <div class="team-role">Investment Advisor</div>
+              <p class="team-bio">Expert in multi-family and commercial investment properties nationwide.</p>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-img-wrap">
+              <img src="images/agent3.jpg" alt="Elena Vasquez" class="team-img" />
+              <div class="team-overlay">
+                <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="contact.html" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="team-body">
+              <div class="team-name">Elena Vasquez</div>
+              <div class="team-role">Buyer's Agent</div>
+              <p class="team-bio">Specializes in guiding first-time buyers through every step of the process.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
 
-<section class="about-container">
+  </main>
 
-<div class="info-box">
-<h2>About Us</h2>
-<p>
-We are a professional real estate company dedicated to helping clients buy, rent and sell properties with confidence and ease.
-</p>
-</div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <span class="logo-icon-text">G</span>
+            <span class="logo-text">Grand Realty</span>
+          </a>
+          <p class="footer-tagline">Your trusted partner in finding the perfect property since 2009.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="listings.html" class="footer-link">All Listings</a></li>
+            <li><a href="blog.html" class="footer-link">Blog</a></li>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Property Types</h4>
+          <ul class="footer-links">
+            <li><a href="listings.html" class="footer-link">Single Family Homes</a></li>
+            <li><a href="listings.html" class="footer-link">Condos and Apartments</a></li>
+            <li><a href="listings.html" class="footer-link">Townhouses</a></li>
+            <li><a href="listings.html" class="footer-link">Luxury Estates</a></li>
+            <li><a href="listings.html" class="footer-link">Commercial</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li><i class="fas fa-map-marker-alt footer-contact-icon"></i><span>1420 Harbor Blvd, Suite 300<br />Los Angeles, CA 90012</span></li>
+            <li><i class="fas fa-phone footer-contact-icon"></i><span>(310) 555-0192</span></li>
+            <li><i class="fas fa-envelope footer-contact-icon"></i><span>hello@grandrealty.com</span></li>
+            <li><i class="fas fa-clock footer-contact-icon"></i><span>Mon–Fri: 9am – 6pm</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">2025 Grand Realty. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          <a href="#" class="footer-bottom-link">Terms of Service</a>
+          <a href="#" class="footer-bottom-link">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-<div class="info-box">
-<h2>Our Mission</h2>
-<p>
-Our mission is to make finding the perfect home simple, fast and stress-free for every family.
-</p>
-</div>
-
-<div class="info-box">
-<h2>Why Choose Us?</h2>
-<p>
-✔ Trusted agents  
-✔ Affordable prices  
-✔ Luxury homes  
-✔ Friendly support
-</p>
-</div>
-
-
-</section>
-
-<h2 class="team-title">Meet Our Team</h2>
-
-<section class="team">
-
-
-<div class="card" onclick="showContact('John Smith','CEO','johnsmith@email.com','+355 69 111 1111')">
-<img src="https://randomuser.me/api/portraits/men/32.jpg">
-<h3>John Smith</h3>
-<p>CEO</p>
-</div>
-
-<div class="card" onclick="showContact('Sarah Johnson','Manager','sarah@email.com','+355 69 222 2222')">
-<img src="https://randomuser.me/api/portraits/women/44.jpg">
-<h3>Sarah Johnson</h3>
-<p>Manager</p>
-</div>
-
-<div class="card" onclick="showContact('David Brown','Agent','david@email.com','+355 69 333 3333')">
-<img src="https://randomuser.me/api/portraits/men/51.jpg">
-<h3>David Brown</h3>
-<p>Agent</p>
-</div>
-
-</section>
-
-</section>
-
-<section class="cta">
-<h2>Ready to Find Your Dream Home?</h2>
-<a href="contact.html">Contact Us</a>
-</section>
-<script>
-function showContact(name, role, email, phone){
-alert(
-"Name: " + name +
-"\nRole: " + role +
-"\nEmail: " + email +
-"\nPhone: " + phone
-);
-}
-</script>
+  <script src="js/script.js"></script>
+  <script src="js/about.js"></script>
 </body>
 </html>
