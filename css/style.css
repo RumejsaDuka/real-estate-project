@@ -1392,7 +1392,7 @@ ul{list-style:none}
 .about-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(13,27,42,0.72) 0%, rgba(13,27,42,0.52) 100%);
+  background: linear-gradient(to bottom, rgba(13,27,42,0.72) 0%, rgba(0, 0, 0, 0.52) 100%);
 }
 
 .about-hero-content {
