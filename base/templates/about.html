@@ -1,0 +1,127 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}About Us - Grand Realty{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/about.css' %}" />{% endblock %}
+{% block nav_about %}active{% endblock %}
+
+{% block content %}
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <img src="{% static 'images/abouthero.jpg' %}" alt="Grand Realty office" class="about-hero-img" />
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-content">
+      <p class="section-eyebrow">Our Story</p>
+      <h1 class="about-hero-title">More Than a Brokerage —<br /><span class="about-hero-accent">A Trusted Partner</span></h1>
+      <p class="about-hero-sub">Since 2009, we've helped thousands of families and investors find their perfect property across America.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-layout">
+        <div class="story-img-wrap">
+          <img src="{% static 'images/team.jpg' %}" alt="Grand Realty team" class="story-img" />
+        </div>
+        <div class="story-text">
+          <p class="section-eyebrow">Who We Are</p>
+          <h2>Dedicated to Finding <em>Your</em> Perfect Home</h2>
+          <p>Grand Realty was founded in Los Angeles in 2009 with a singular vision: to bring honesty, expertise, and genuine care to every real estate transaction. What started as a small boutique agency has grown into one of the most trusted names in premium property across the country.</p>
+          <p>We specialize in luxury residential sales, investment properties, and first-time buyer guidance — offering a full-service experience from initial search to closing day and beyond.</p>
+          <div class="story-highlights">
+            <div class="story-highlight">
+              <div class="sh-icon"><i class="fas fa-handshake"></i></div>
+              <div class="sh-text">
+                <strong>Client-First Philosophy</strong>
+                <span>Every decision we make is guided by what's truly best for our clients.</span>
+              </div>
+            </div>
+            <div class="story-highlight">
+              <div class="sh-icon"><i class="fas fa-map"></i></div>
+              <div class="sh-text">
+                <strong>Deep Market Knowledge</strong>
+                <span>Our agents deliver insights you won't find anywhere online.</span>
+              </div>
+            </div>
+            <div class="story-highlight">
+              <div class="sh-icon"><i class="fas fa-shield-halved"></i></div>
+              <div class="sh-text">
+                <strong>End-to-End Support</strong>
+                <span>From pre-approval to moving day, we're with you every step.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">What Drives Us</p>
+        <h2 class="section-title">Our Core Values</h2>
+        <p class="section-subtitle">The principles that have guided every transaction and relationship since day one.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-star"></i></div>
+          <h3>Excellence</h3>
+          <p>We hold ourselves to the highest standard in every aspect of our work.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-eye"></i></div>
+          <h3>Transparency</h3>
+          <p>No hidden fees, no surprises — open communication at every stage.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-heart"></i></div>
+          <h3>Integrity</h3>
+          <p>We earn your trust by doing the right thing, even when it's not the easy thing.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-users"></i></div>
+          <h3>Community</h3>
+          <p>We're deeply invested in the neighborhoods and communities we serve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">The People Behind the Results</p>
+        <h2 class="section-title-dark">Meet Our Team</h2>
+        <p class="section-subtitle-dark">Passionate professionals who bring knowledge and care to every client relationship.</p>
+      </div>
+      <div class="team-grid">
+        {% for member in team %}
+        <div class="team-card">
+          <div class="team-img-wrap">
+            <img src="{% static member.image %}" alt="{{ member.name }}" class="team-img" />
+            <div class="team-overlay">
+              <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-body">
+            <div class="team-name">{{ member.name }}</div>
+            <div class="team-role">{{ member.role }}</div>
+            <p class="team-bio">{{ member.bio }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/about.js' %}"></script>
+{% endblock %}

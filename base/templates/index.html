@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Grand Realty - Find Your Perfect Home{% endblock %}
+{% block navbar_class %}{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=80"
+        alt="Luxury home exterior"
+        class="hero-image"
+      />
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Premium Properties</p>
+      <h1 class="hero-title">Find Your<br /><span class="hero-accent">Dream Home</span></h1>
+      <p class="hero-subtitle">We help you find the best houses, apartments and villas at the best prices.</p>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span class="scroll-line"></span>
+      <span class="scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- FEATURED PROPERTIES -->
+  <section class="featured-section" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Handpicked for You</p>
+        <h2 class="section-title">Featured Properties</h2>
+        <p class="section-subtitle">A curated selection of our finest available homes across the country.</p>
+      </div>
+
+      <div class="properties-grid">
+        {% for prop in properties %}
+        <article class="property-card {% if prop.featured %}featured-large{% endif %}" data-index="{{ forloop.counter0 }}">
+          <div class="card-image-wrap">
+            <img
+              src="{% static prop.image %}"
+              alt="{{ prop.title }}"
+              class="card-image"
+              loading="lazy"
+            />
+            <span class="card-badge
+              {% if prop.badge == 'luxury' %}badge-luxury
+              {% elif prop.badge == 'new' %}badge-new
+              {% elif prop.badge == 'reduced' %}badge-reduced
+              {% endif %}">
+              {% if prop.badge == 'sale' %}For Sale
+              {% elif prop.badge == 'luxury' %}Luxury
+              {% elif prop.badge == 'new' %}New
+              {% elif prop.badge == 'reduced' %}Reduced
+              {% endif %}
+            </span>
+            <div class="card-overlay">
+              <a href="{% url 'property' prop.id %}" class="card-overlay-btn">Quick View</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-price">${{ prop.price|floatformat:0 }}</div>
+            <h3 class="card-title">{{ prop.title }}</h3>
+            <p class="card-location">
+              <i class="fas fa-map-marker-alt"></i> {{ prop.location }}
+            </p>
+            <div class="card-meta">
+              <span class="meta-item"><i class="fas fa-bed"></i> {{ prop.beds }} Beds</span>
+              <span class="meta-sep"></span>
+              <span class="meta-item"><i class="fas fa-bath"></i> {{ prop.baths }} Baths</span>
+              <span class="meta-sep"></span>
+              <span class="meta-item"><i class="fas fa-vector-square"></i> {{ prop.sqft|floatformat:0 }} sqft</span>
+            </div>
+            <a href="{% url 'property' prop.id %}" class="card-btn">View Details</a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta-section">
+    <div class="cta-bg">
+      <img src="{% static 'images/agent.webp' %}" alt="Aerial view" class="cta-image" />
+      <div class="cta-overlay"></div>
+    </div>
+    <div class="container cta-content">
+      <div class="cta-inner">
+        <p class="section-eyebrow" style="color: var(--gold);">Ready to Move?</p>
+        <h2 class="cta-title">Explore All Available<br />Properties</h2>
+        <p class="cta-subtitle">Browse our complete portfolio of over 1,200 listings across the country. Your perfect home is waiting.</p>
+        <div class="cta-actions">
+          <a href="{% url 'listings' %}" class="btn btn-gold">Browse All Listings</a>
+          <a href="{% url 'contact' %}" class="btn btn-outline-white">Talk to an Agent</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

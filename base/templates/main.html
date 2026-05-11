@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Grand Realty{% endblock %}</title>
+
+  {% block extra_css %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  {% block page_css %}{% endblock %}
+
+  <link rel="icon" type="image/x-icon" href="{% static 'images/logo.jpg' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+  <!-- NAVBAR -->
+  <header class="navbar {% block navbar_class %}inner-page{% endblock %}" id="navbar">
+    <div class="nav-container">
+      <a href="{% url 'index' %}" class="nav-logo">
+        <img src="{% static 'images/logo.jpg' %}" alt="Grand Realty Logo" class="logo-icon" />
+        <span class="logo-text">Grand Realty</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="{% url 'index' %}" class="nav-link {% block nav_home %}{% endblock %}">Home</a>
+        <a href="{% url 'listings' %}" class="nav-link {% block nav_listings %}{% endblock %}">Listings</a>
+        <a href="{% url 'about' %}" class="nav-link {% block nav_about %}{% endblock %}">About</a>
+        <a href="{% url 'contact' %}" class="nav-link {% block nav_contact %}{% endblock %}">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Django messages -->
+  {% if messages %}
+    <div class="django-messages">
+      {% for message in messages %}
+        <div class="django-message django-message-{{ message.tags }}">
+          {{ message }}
+          <button class="msg-close" onclick="this.parentElement.remove()">×</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="{% url 'index' %}" class="footer-logo">
+            <span class="logo-icon-text">G</span>
+            <span class="logo-text">Grand Realty</span>
+          </a>
+          <p class="footer-tagline">Your trusted partner in finding the perfect property since 2009.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'index' %}" class="footer-link">Home</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">All Listings</a></li>
+            <li><a href="{% url 'about' %}" class="footer-link">About Us</a></li>
+            <li><a href="{% url 'contact' %}" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Property Types</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'listings' %}" class="footer-link">Single Family Homes</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Condos and Apartments</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Townhouses</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Luxury Estates</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Commercial</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li><i class="fas fa-map-marker-alt footer-contact-icon"></i><span>1420 Harbor Blvd, Suite 300<br />Los Angeles, CA 90012</span></li>
+            <li><i class="fas fa-phone footer-contact-icon"></i><span>(310) 555-0192</span></li>
+            <li><i class="fas fa-envelope footer-contact-icon"></i><span>hello@grandrealty.com</span></li>
+            <li><i class="fas fa-clock footer-contact-icon"></i><span>Mon–Fri: 9am – 6pm</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2025 Grand Realty. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          <a href="#" class="footer-bottom-link">Terms of Service</a>
+          <a href="#" class="footer-bottom-link">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
