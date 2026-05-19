@@ -39,10 +39,10 @@
 
       <div class="properties-grid">
         {% for prop in properties %}
-        <article class="property-card {% if prop.featured %}featured-large{% endif %}" data-index="{{ forloop.counter0 }}">
+        <article class="property-card" data-index="{{ forloop.counter0 }}">
           <div class="card-image-wrap">
             <img
-              src="{% static prop.image %}"
+              src="{{ prop.image.url }}"
               alt="{{ prop.title }}"
               class="card-image"
               loading="lazy"
@@ -59,11 +59,11 @@
               {% endif %}
             </span>
             <div class="card-overlay">
-              <a href="{% url 'property' prop.id %}" class="card-overlay-btn">Quick View</a>
+              <a href="{% url 'property_detail' prop.id %}" class="card-overlay-btn">Quick View</a>
             </div>
           </div>
           <div class="card-body">
-            <div class="card-price">${{ prop.price|floatformat:0 }}</div>
+            <div class="card-price">${{ prop.price|floatformat:0 }}{% if prop.listing_type == 'rent' %}<span class="card-price-period">/month</span>{% endif %}</div>
             <h3 class="card-title">{{ prop.title }}</h3>
             <p class="card-location">
               <i class="fas fa-map-marker-alt"></i> {{ prop.location }}
@@ -75,7 +75,7 @@
               <span class="meta-sep"></span>
               <span class="meta-item"><i class="fas fa-vector-square"></i> {{ prop.sqft|floatformat:0 }} sqft</span>
             </div>
-            <a href="{% url 'property' prop.id %}" class="card-btn">View Details</a>
+            <a href="{% url 'property_detail' prop.id %}" class="card-btn">View Details</a>
           </div>
         </article>
         {% endfor %}

@@ -4,12 +4,7 @@
 {% block title %}All Listings - Grand Realty{% endblock %}
 {% block nav_listings %}active{% endblock %}
 
-{% block extra_head %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/listings.css' %}">
-{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/listings.css' %}" />{% endblock %}
 
 {% block content %}
 
@@ -123,7 +118,7 @@
 
       <div class="listings-grid" id="listingsGrid">
         {% for prop in properties %}
-        <article class="property-card listing-card {% if prop.featured %}featured-large{% endif %}"
+        <article class="property-card listing-card"
                  data-price="{{ prop.price }}"
                  data-beds="{{ prop.beds }}"
                  data-type="{{ prop.badge }}"
@@ -135,7 +130,7 @@
 
             {% if prop.badge %}
             <span class="card-badge {% if prop.badge == 'luxury' %}badge-luxury{% elif prop.badge == 'new' %}badge-new{% elif prop.badge == 'reduced' %}badge-reduced{% endif %}">
-              {% if prop.badge == 'luxury' %}✦ Luxury{% elif prop.badge == 'new' %}New{% elif prop.badge == 'reduced' %}Reduced{% endif %}
+              {% if prop.badge == 'luxury' %}Luxury{% elif prop.badge == 'new' %}New{% elif prop.badge == 'reduced' %}Reduced{% endif %}
             </span>
             {% endif %}
 
@@ -144,7 +139,7 @@
             </span>
 
             <div class="card-overlay">
-              <a href="{% url 'property' prop.id %}" class="card-overlay-btn">Quick View</a>
+              <a href="{% url 'property_detail' prop.id %}" class="card-overlay-btn">Quick View</a>
             </div>
 
             {% if prop.featured %}
@@ -154,7 +149,7 @@
 
           <div class="card-body">
             <div class="card-price">
-              ${{ prop.price|floatformat:0 }}{% if prop.listing_type == 'rent' %}<span class="card-price-period">/mo</span>{% endif %}
+              ${{ prop.price|floatformat:0 }}{% if prop.listing_type == 'rent' %}<span class="card-price-period">/month</span>{% endif %}
             </div>
             <h3 class="card-title">{{ prop.title }}</h3>
             <p class="card-location"><i class="fas fa-map-marker-alt"></i> {{ prop.location }}</p>
@@ -165,7 +160,7 @@
               <span class="meta-sep"></span>
               <span class="meta-item"><i class="fas fa-vector-square"></i> {{ prop.sqft }} sqft</span>
             </div>
-            <a href="{% url 'property' prop.id %}" class="card-btn">View Details</a>
+            <a href="{% url 'property_detail' prop.id %}" class="card-btn">View Details</a>
           </div>
         </article>
         {% empty %}

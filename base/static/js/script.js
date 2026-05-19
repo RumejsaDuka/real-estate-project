@@ -97,14 +97,10 @@
 
   /* ── ACTIVE NAV LINK ── */
   (function highlightCurrentPage() {
-    const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
     document.querySelectorAll('.nav-link').forEach(function (link) {
-      const href = link.getAttribute('href');
-      if (href === currentFile) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
+      const href = new URL(link.getAttribute('href'), window.location.origin).pathname.replace(/\/$/, '') || '/';
+      link.classList.toggle('active', href === currentPath);
     });
   }());
 
@@ -455,10 +451,26 @@
   var brkTotal        = document.getElementById('brkTotal');
 
   function calcMortgage() {
-    var price  = parseFloat(document.getElementById('mortgagePrice').value) || 0;
-    var down   = parseFloat(document.getElementById('mortgageDown').value)   || 0;
-    var rate   = parseFloat(document.getElementById('mortgageRate').value)   || 0;
-    var term   = parseInt(document.getElementById('mortgageTerm').value, 10) || 30;
+    var priceEl = document.getElementById('mortgagePrice');
+    if (!priceEl) return;
+
+    var downEl = document.getElementById('mortgageDown');
+    var rateEl = document.getElementById('mortgageRate');
+    var termEl = document.getElementById('mortgageTerm');
+    var listingType = document.documentElement.dataset.listingType || 'sale';
+
+    var price = parseFloat(priceEl.value) || 0;
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+    if (listingType === 'rent') {
+      if (mortgageMonthly) mortgageMonthly.textContent = fmt(price * 12);
+      return;
+    }
+
+    var down = downEl ? parseFloat(downEl.value) || 0 : 0;
+    var rate = rateEl ? parseFloat(rateEl.value) || 0 : 0;
+    var term = termEl ? parseInt(termEl.value, 10) || 30 : 30;
 
     var principal   = price - down;
     var monthlyRate = rate / 100 / 12;
@@ -475,8 +487,6 @@
     var tax   = 14200 / 12;
     var hoa   = 420;
     var total = pi + tax + hoa;
-
-    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
 
     if (mortgageMonthly) mortgageMonthly.textContent = fmt(pi);
     if (brkPI)           brkPI.textContent            = fmt(pi);

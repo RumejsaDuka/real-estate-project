@@ -1,0 +1,97 @@
+/* Listings page polish layer */
+
+.listings-hero {
+  min-height: 440px;
+}
+
+.filter-sticky {
+  position: sticky;
+  top: 72px;
+  z-index: 40;
+  background: rgba(245, 247, 250, .88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(221, 227, 236, .8);
+}
+
+.filter-bar {
+  border: 1px solid rgba(221, 227, 236, .9);
+  box-shadow: 0 18px 45px rgba(21, 44, 72, .1);
+}
+
+.filter-input {
+  min-height: 42px;
+}
+
+.filter-search-btn,
+.filter-reset-btn,
+.view-btn {
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.filter-search-btn:hover,
+.filter-reset-btn:hover,
+.view-btn:hover {
+  transform: translateY(-1px);
+}
+
+.results-bar {
+  align-items: center;
+  gap: 18px;
+}
+
+.listings-grid {
+  align-items: stretch;
+}
+
+.listing-card {
+  height: 100%;
+}
+
+.listing-card .card-body {
+  display: flex;
+  min-height: 245px;
+  flex-direction: column;
+}
+
+.listing-card .card-btn {
+  margin-top: auto;
+}
+
+.listings-grid.list-view {
+  grid-template-columns: 1fr;
+}
+
+.listings-grid.list-view .listing-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 38%) 1fr;
+}
+
+.listings-grid.list-view .card-image-wrap {
+  height: 100%;
+  min-height: 260px;
+  aspect-ratio: auto;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .filter-sticky {
+    position: static;
+  }
+
+  .listings-grid.list-view .listing-card {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .listings-hero {
+    min-height: 360px;
+  }
+
+  .results-bar {
+    align-items: flex-start;
+  }
+}

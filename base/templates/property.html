@@ -4,12 +4,7 @@
 {% block title %}{{ property.title }} - Grand Realty{% endblock %}
 {% block nav_listings %}active{% endblock %}
 
-{% block extra_head %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/property.css' %}">
-{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/property.css' %}" />{% endblock %}
 
 {% block content %}
 
@@ -32,7 +27,7 @@
       <div class="property-hero-left">
         <div class="prop-badges">
           {% if property.badge %}
-            {% if property.badge == 'luxury' %}<span class="prop-badge prop-badge-luxury">✦ Luxury</span>
+            {% if property.badge == 'luxury' %}<span class="prop-badge prop-badge-luxury">Luxury</span>
             {% elif property.badge == 'new' %}<span class="prop-badge prop-badge-new">New Listing</span>
             {% elif property.badge == 'reduced' %}<span class="prop-badge prop-badge-reduced">Price Reduced</span>
             {% endif %}
@@ -76,7 +71,7 @@
           {% if property.listing_type == 'rent' %}Monthly Rent{% else %}Asking Price{% endif %}
         </span>
         <div class="property-price">
-          ${{ property.price|floatformat:0 }}{% if property.listing_type == 'rent' %}<span class="price-period">/mo</span>{% endif %}
+          ${{ property.price|floatformat:0 }}{% if property.listing_type == 'rent' %}<span class="price-period">/month</span>{% endif %}
         </div>
         <div class="property-actions">
           <button class="action-btn" id="btnSave" aria-label="Save property">
@@ -95,29 +90,39 @@
 
   <!-- GALLERY -->
   <section class="gallery-section">
-    {% with images=property.gallery.all %}
-    {% if images|length >= 3 %}
-    <div class="gallery-grid">
-      <div class="gallery-main" id="galleryMain">
-        <img src="{{ property.image.url }}" alt="{{ property.title }}" class="gallery-main-img" id="galleryMainImg" />
+    <div class="property-photo-showcase">
+      <div class="gallery-main photo-feature" id="galleryMain">
+        <img
+          src="{{ gallery_photos.0.url }}"
+          alt="{{ gallery_photos.0.caption }}"
+          class="gallery-main-img"
+          id="galleryMainImg"
+        />
+        <div class="photo-feature-caption">
+          <span class="photo-feature-label" id="galleryMainLabel">{{ gallery_photos.0.label }}</span>
+          <span class="photo-feature-title" id="galleryMainCaption">{{ gallery_photos.0.caption }}</span>
+        </div>
       </div>
-      {% for img in images|slice:":2" %}
-      <div class="gallery-thumb">
-        <img src="{{ img.image.url }}" alt="{{ property.title }} photo {{ forloop.counter }}" loading="lazy" />
+
+      <div class="photo-tile-grid" aria-label="Property photo gallery">
+        {% for photo in gallery_photos %}
+        {% if not forloop.first %}
+        <button
+          type="button"
+          class="gallery-thumb photo-tile"
+          data-src="{{ photo.url }}"
+          data-label="{{ photo.label }}"
+          data-caption="{{ photo.caption }}"
+          aria-label="Show {{ photo.label }} photo"
+        >
+          <img src="{{ photo.url }}" alt="{{ photo.caption }}" loading="lazy" />
+          <span class="photo-tile-overlay"></span>
+          <span class="photo-tile-label">{{ photo.label }}</span>
+        </button>
+        {% endif %}
+        {% endfor %}
       </div>
-      {% endfor %}
-      {% if images|length > 2 %}
-      <div class="gallery-counter">+{{ images|length|add:"-2" }} photos</div>
-      {% endif %}
     </div>
-    {% else %}
-    <div class="gallery-layout">
-      <div class="gallery-main" id="galleryMain">
-        <img src="{{ property.image.url }}" alt="{{ property.title }}" class="gallery-main-img" id="galleryMainImg" />
-      </div>
-    </div>
-    {% endif %}
-    {% endwith %}
   </section>
 
   <!-- MAIN CONTENT + SIDEBAR -->
@@ -308,7 +313,7 @@
               <span class="mortgage-monthly-label">
                 {% if property.listing_type == 'rent' %}Annual Rent Cost{% else %}Est. Monthly Payment{% endif %}
               </span>
-              <span class="mortgage-monthly-amount" id="mortgageMonthly">—</span>
+              <span class="mortgage-monthly-amount" id="mortgageMonthly">-</span>
             </div>
           </div>
 
@@ -332,12 +337,12 @@
               {% if sim.badge == 'luxury' %}Luxury{% elif sim.badge == 'new' %}New{% elif sim.badge == 'reduced' %}Reduced{% elif sim.listing_type == 'rent' %}For Rent{% else %}For Sale{% endif %}
             </span>
             <div class="card-overlay">
-              <a href="{% url 'property' sim.id %}" class="card-overlay-btn">Quick View</a>
+              <a href="{% url 'property_detail' sim.id %}" class="card-overlay-btn">Quick View</a>
             </div>
           </div>
           <div class="card-body">
             <div class="card-price">
-              ${{ sim.price|floatformat:0 }}{% if sim.listing_type == 'rent' %}<span class="card-price-period">/mo</span>{% endif %}
+              ${{ sim.price|floatformat:0 }}{% if sim.listing_type == 'rent' %}<span class="card-price-period">/month</span>{% endif %}
             </div>
             <h3 class="card-title">{{ sim.title }}</h3>
             <p class="card-location"><i class="fas fa-map-marker-alt"></i> {{ sim.location }}</p>
@@ -346,7 +351,7 @@
               <span class="meta-sep"></span>
               <span class="meta-item"><i class="fas fa-bath"></i> {{ sim.baths }} Baths</span>
             </div>
-            <a href="{% url 'property' sim.id %}" class="card-btn">View Details</a>
+            <a href="{% url 'property_detail' sim.id %}" class="card-btn">View Details</a>
           </div>
         </article>
         {% endfor %}
@@ -361,7 +366,7 @@
 {% endblock %}
 
 {% block extra_js %}
-{# Pass the listing type to JS cleanly via a data attribute — no inline JS needed #}
+{# Pass the listing type to JS cleanly via a data attribute. #}
 <script>document.documentElement.dataset.listingType = '{{ property.listing_type }}';</script>
 <script src="{% static 'js/property.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,43 @@
+/* About page polish layer */
+
+.story-section,
+.team-section {
+  background: var(--bg);
+}
+
+.story-layout {
+  align-items: center;
+}
+
+.story-img-wrap,
+.value-card,
+.team-card {
+  border: 1px solid rgba(221, 227, 236, .8);
+}
+
+.story-highlight,
+.value-card,
+.team-card {
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.story-highlight:hover,
+.value-card:hover,
+.team-card:hover {
+  border-color: rgba(212, 175, 55, .45);
+  box-shadow: 0 16px 36px rgba(21, 44, 72, .12);
+}
+
+.team-img-wrap {
+  background: var(--bg-alt);
+}
+
+.team-bio {
+  min-height: 66px;
+}
+
+@media (max-width: 760px) {
+  .about-hero {
+    height: 400px;
+  }
+}

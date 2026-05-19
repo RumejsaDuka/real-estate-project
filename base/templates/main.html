@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Grand Realty{% endblock %}</title>
 
+  {% block extra_head %}{% endblock %}
   {% block extra_css %}{% endblock %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   {% block page_css %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'css/polish.css' %}" />
 
   <link rel="icon" type="image/x-icon" href="{% static 'images/logo.jpg' %}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,7 +45,7 @@
       {% for message in messages %}
         <div class="django-message django-message-{{ message.tags }}">
           {{ message }}
-          <button class="msg-close" onclick="this.parentElement.remove()">×</button>
+          <button class="msg-close" onclick="this.parentElement.remove()">x</button>
         </div>
       {% endfor %}
     </div>
@@ -95,7 +97,7 @@
             <li><i class="fas fa-map-marker-alt footer-contact-icon"></i><span>1420 Harbor Blvd, Suite 300<br />Los Angeles, CA 90012</span></li>
             <li><i class="fas fa-phone footer-contact-icon"></i><span>(310) 555-0192</span></li>
             <li><i class="fas fa-envelope footer-contact-icon"></i><span>hello@grandrealty.com</span></li>
-            <li><i class="fas fa-clock footer-contact-icon"></i><span>Mon–Fri: 9am – 6pm</span></li>
+            <li><i class="fas fa-clock footer-contact-icon"></i><span>Mon-Fri: 9am - 6pm</span></li>
           </ul>
         </div>
       </div>

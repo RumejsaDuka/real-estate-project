@@ -1,0 +1,40 @@
+/* Contact page polish layer */
+
+.contact-strip {
+  position: relative;
+  z-index: 5;
+}
+
+.contact-strip-grid,
+.contact-form-card,
+.contact-map-card {
+  border: 1px solid rgba(221, 227, 236, .85);
+  box-shadow: 0 18px 45px rgba(21, 44, 72, .1);
+}
+
+.cf-input-wrap,
+.cf-textarea {
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.cf-input-wrap:focus-within,
+.cf-textarea:focus {
+  border-color: rgba(212, 175, 55, .85);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, .12);
+}
+
+.cf-submit-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.contact-map-iframe-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .contact-strip-grid {
+    gap: 10px;
+  }
+}

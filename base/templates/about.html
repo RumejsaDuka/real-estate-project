@@ -13,7 +13,7 @@
     <div class="about-hero-overlay"></div>
     <div class="about-hero-content">
       <p class="section-eyebrow">Our Story</p>
-      <h1 class="about-hero-title">More Than a Brokerage —<br /><span class="about-hero-accent">A Trusted Partner</span></h1>
+      <h1 class="about-hero-title">More Than a Brokerage<br /><span class="about-hero-accent">A Trusted Partner</span></h1>
       <p class="about-hero-sub">Since 2009, we've helped thousands of families and investors find their perfect property across America.</p>
     </div>
   </section>
@@ -29,7 +29,7 @@
           <p class="section-eyebrow">Who We Are</p>
           <h2>Dedicated to Finding <em>Your</em> Perfect Home</h2>
           <p>Grand Realty was founded in Los Angeles in 2009 with a singular vision: to bring honesty, expertise, and genuine care to every real estate transaction. What started as a small boutique agency has grown into one of the most trusted names in premium property across the country.</p>
-          <p>We specialize in luxury residential sales, investment properties, and first-time buyer guidance — offering a full-service experience from initial search to closing day and beyond.</p>
+          <p>We specialize in luxury residential sales, investment properties, and first-time buyer guidance, offering a full-service experience from initial search to closing day and beyond.</p>
           <div class="story-highlights">
             <div class="story-highlight">
               <div class="sh-icon"><i class="fas fa-handshake"></i></div>
@@ -75,7 +75,7 @@
         <div class="value-card">
           <div class="value-icon"><i class="fas fa-eye"></i></div>
           <h3>Transparency</h3>
-          <p>No hidden fees, no surprises — open communication at every stage.</p>
+          <p>No hidden fees, no surprises. Just open communication at every stage.</p>
         </div>
         <div class="value-card">
           <div class="value-icon"><i class="fas fa-heart"></i></div>
@@ -100,10 +100,10 @@
         <p class="section-subtitle-dark">Passionate professionals who bring knowledge and care to every client relationship.</p>
       </div>
       <div class="team-grid">
-        {% for member in team %}
+        {% for member in agents %}
         <div class="team-card">
           <div class="team-img-wrap">
-            <img src="{% static member.image %}" alt="{{ member.name }}" class="team-img" />
+            <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-img" />
             <div class="team-overlay">
               <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
               <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
@@ -115,6 +115,49 @@
             <p class="team-bio">{{ member.bio }}</p>
           </div>
         </div>
+        {% empty %}
+        <div class="team-card">
+          <div class="team-img-wrap">
+            <img src="{% static 'images/agent1.jpg' %}" alt="James Harrington" class="team-img" />
+            <div class="team-overlay">
+              <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-body">
+            <div class="team-name">James Harrington</div>
+            <div class="team-role">Senior Property Specialist</div>
+            <p class="team-bio">Focused on premium residential sales and private client advisory.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-img-wrap">
+            <img src="{% static 'images/agent2.jpg' %}" alt="Maya Collins" class="team-img" />
+            <div class="team-overlay">
+              <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-body">
+            <div class="team-name">Maya Collins</div>
+            <div class="team-role">Investment Advisor</div>
+            <p class="team-bio">Guides buyers through market analysis, negotiation, and portfolio growth.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-img-wrap">
+            <img src="{% static 'images/agent3.jpg' %}" alt="Daniel Reyes" class="team-img" />
+            <div class="team-overlay">
+              <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-body">
+            <div class="team-name">Daniel Reyes</div>
+            <div class="team-role">Leasing Consultant</div>
+            <p class="team-bio">Helps clients compare neighborhoods, terms, and long-term rental value.</p>
+          </div>
+        </div>
         {% endfor %}
       </div>
     </div>
@@ -123,5 +166,4 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/about.js' %}"></script>
 {% endblock %}

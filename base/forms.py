@@ -1,22 +1,23 @@
 from django import forms
 
+from .models import ContactMessage
 
-class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100, required=True)
-    email = forms.EmailField(required=True)
-    phone = forms.CharField(max_length=30, required=False)
-    interest = forms.ChoiceField(
-        choices=[
-            ('', 'Zgjidh një opsion'),
-            ('buying', 'Buying a Property'),
-            ('selling', 'Selling a Property'),
-            ('renting', 'Renting / Leasing'),
-            ('investment', 'Investment Advice'),
-            ('valuation', 'Property Valuation'),
-            ('general', 'General Inquiry'),
-        ],
-        required=False
-    )
-    subject = forms.CharField(max_length=200, required=True)
-    message = forms.CharField(widget=forms.Textarea, required=True)
+
+class ContactForm(forms.ModelForm):
     privacy = forms.BooleanField(required=True)
+
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'phone', 'interest', 'subject', 'message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 6}),
+        }
+
+    def clean_name(self):
+        return self.cleaned_data['name'].strip()
+
+    def clean_subject(self):
+        return self.cleaned_data['subject'].strip()
+
+    def clean_message(self):
+        return self.cleaned_data['message'].strip()
