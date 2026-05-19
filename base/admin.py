@@ -1,14 +1,15 @@
 from django.contrib import admin
-from .models import Property, ContactMessage, TeamMember
 
-@admin.register(Property)
-class PropertyAdmin(admin.ModelAdmin):
-    list_display = ['title', 'location', 'price', 'badge', 'featured']
+from .models import (
+    Property,
+    PropertyImage,
+    Agent,
+    PropertyFeature,
+    Inquiry
+)
 
-@admin.register(ContactMessage)
-class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'subject', 'created_at']
-
-@admin.register(TeamMember)
-class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ['name', 'role']
+admin.site.register(Property)
+admin.site.register(PropertyImage)
+admin.site.register(Agent)
+admin.site.register(PropertyFeature)
+admin.site.register(Inquiry)

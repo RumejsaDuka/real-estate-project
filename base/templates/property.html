@@ -4,6 +4,13 @@
 {% block title %}{{ property.title }} - Grand Realty{% endblock %}
 {% block nav_listings %}active{% endblock %}
 
+{% block extra_head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/property.css' %}">
+{% endblock %}
+
 {% block content %}
 
   <!-- BREADCRUMB -->
@@ -19,61 +26,68 @@
     </div>
   </div>
 
-  <!-- PROPERTY HEADER -->
-  <section class="property-header-section">
-    <div class="container">
-      <div class="property-header">
-        <div class="property-header-left">
-          <div class="property-badges">
-            <span class="prop-badge prop-badge-{% if property.badge == 'luxury' %}luxury{% else %}status{% endif %}">
-              {% if property.badge == 'luxury' %}Luxury{% elif property.badge == 'new' %}New{% elif property.badge == 'reduced' %}Reduced{% else %}For Sale{% endif %}
-            </span>
+  <!-- PROPERTY HERO -->
+  <section class="property-hero">
+    <div class="property-hero-inner">
+      <div class="property-hero-left">
+        <div class="prop-badges">
+          {% if property.badge %}
+            {% if property.badge == 'luxury' %}<span class="prop-badge prop-badge-luxury">✦ Luxury</span>
+            {% elif property.badge == 'new' %}<span class="prop-badge prop-badge-new">New Listing</span>
+            {% elif property.badge == 'reduced' %}<span class="prop-badge prop-badge-reduced">Price Reduced</span>
+            {% endif %}
+          {% endif %}
+          {% if property.listing_type == 'rent' %}
+            <span class="prop-badge prop-badge-rent">For Rent</span>
+          {% else %}
             <span class="prop-badge prop-badge-status">For Sale</span>
+          {% endif %}
+        </div>
+
+        <h1 class="property-title">{{ property.title }}</h1>
+        <p class="property-address">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ property.location }}
+        </p>
+
+        <div class="property-quick-stats">
+          <div class="quick-stat">
+            <i class="fas fa-bed"></i>
+            <span class="qs-value">{{ property.beds }}</span>
+            <span class="qs-label">Bedrooms</span>
           </div>
-          <h1 class="property-title">{{ property.title }}</h1>
-          <p class="property-address">
-            <i class="fas fa-map-marker-alt"></i>
-            {{ property.location }}
-          </p>
-          <div class="property-quick-stats">
-            <div class="quick-stat">
-              <i class="fas fa-bed"></i>
-              <span class="qs-value">{{ property.beds }}</span>
-              <span class="qs-label">Bedrooms</span>
-            </div>
-            <div class="qs-divider"></div>
-            <div class="quick-stat">
-              <i class="fas fa-bath"></i>
-              <span class="qs-value">{{ property.baths }}</span>
-              <span class="qs-label">Bathrooms</span>
-            </div>
-            <div class="qs-divider"></div>
-            <div class="quick-stat">
-              <i class="fas fa-vector-square"></i>
-              <span class="qs-value">{{ property.sqft }}</span>
-              <span class="qs-label">Sqft</span>
-            </div>
+          <div class="qs-divider"></div>
+          <div class="quick-stat">
+            <i class="fas fa-bath"></i>
+            <span class="qs-value">{{ property.baths }}</span>
+            <span class="qs-label">Bathrooms</span>
+          </div>
+          <div class="qs-divider"></div>
+          <div class="quick-stat">
+            <i class="fas fa-vector-square"></i>
+            <span class="qs-value">{{ property.sqft }}</span>
+            <span class="qs-label">Sqft</span>
           </div>
         </div>
-        <div class="property-header-right">
-          <div class="property-price-block">
-            <span class="price-label">Asking Price</span>
-            <div class="property-price">${{ property.price|floatformat:0 }}</div>
-          </div>
-          <div class="property-actions">
-            <button class="action-btn" id="btnSave" aria-label="Save property">
-              <i class="far fa-heart"></i>
-              <span>Save</span>
-            </button>
-            <button class="action-btn" id="btnShare" aria-label="Share property">
-              <i class="fas fa-share-nodes"></i>
-              <span>Share</span>
-            </button>
-            <button class="action-btn" onclick="window.print()" aria-label="Print listing">
-              <i class="fas fa-print"></i>
-              <span>Print</span>
-            </button>
-          </div>
+      </div>
+
+      <div class="property-hero-right">
+        <span class="price-label">
+          {% if property.listing_type == 'rent' %}Monthly Rent{% else %}Asking Price{% endif %}
+        </span>
+        <div class="property-price">
+          ${{ property.price|floatformat:0 }}{% if property.listing_type == 'rent' %}<span class="price-period">/mo</span>{% endif %}
+        </div>
+        <div class="property-actions">
+          <button class="action-btn" id="btnSave" aria-label="Save property">
+            <i class="far fa-heart"></i><span>Save</span>
+          </button>
+          <button class="action-btn" id="btnShare" aria-label="Share property">
+            <i class="fas fa-share-nodes"></i><span>Share</span>
+          </button>
+          <button class="action-btn" id="btnPrint" aria-label="Print listing">
+            <i class="fas fa-print"></i><span>Print</span>
+          </button>
         </div>
       </div>
     </div>
@@ -81,18 +95,29 @@
 
   <!-- GALLERY -->
   <section class="gallery-section">
-    <div class="container">
-      <div class="gallery-layout">
-        <div class="gallery-main" id="galleryMain">
-          <img
-            src="{% static property.image %}"
-            alt="{{ property.title }}"
-            class="gallery-main-img"
-            id="galleryMainImg"
-          />
-        </div>
+    {% with images=property.gallery.all %}
+    {% if images|length >= 3 %}
+    <div class="gallery-grid">
+      <div class="gallery-main" id="galleryMain">
+        <img src="{{ property.image.url }}" alt="{{ property.title }}" class="gallery-main-img" id="galleryMainImg" />
+      </div>
+      {% for img in images|slice:":2" %}
+      <div class="gallery-thumb">
+        <img src="{{ img.image.url }}" alt="{{ property.title }} photo {{ forloop.counter }}" loading="lazy" />
+      </div>
+      {% endfor %}
+      {% if images|length > 2 %}
+      <div class="gallery-counter">+{{ images|length|add:"-2" }} photos</div>
+      {% endif %}
+    </div>
+    {% else %}
+    <div class="gallery-layout">
+      <div class="gallery-main" id="galleryMain">
+        <img src="{{ property.image.url }}" alt="{{ property.title }}" class="gallery-main-img" id="galleryMainImg" />
       </div>
     </div>
+    {% endif %}
+    {% endwith %}
   </section>
 
   <!-- MAIN CONTENT + SIDEBAR -->
@@ -100,8 +125,8 @@
     <div class="container">
       <div class="property-layout">
 
+        <!-- TABS + PANELS -->
         <div class="property-content">
-          <!-- TABS -->
           <div class="prop-tabs" id="propTabs">
             <button class="prop-tab active" data-tab="overview">Overview</button>
             <button class="prop-tab" data-tab="features">Features</button>
@@ -114,8 +139,8 @@
               <h2 class="prop-section-title">Property Overview</h2>
               <div class="overview-grid">
                 <div class="overview-item">
-                  <span class="ov-label">Property Type</span>
-                  <span class="ov-value">Residential</span>
+                  <span class="ov-label">Listing Type</span>
+                  <span class="ov-value">{% if property.listing_type == 'rent' %}For Rent{% else %}For Sale{% endif %}</span>
                 </div>
                 <div class="overview-item">
                   <span class="ov-label">Bedrooms</span>
@@ -131,11 +156,22 @@
                 </div>
               </div>
             </div>
+
             <div class="prop-section">
               <h2 class="prop-section-title">About This Property</h2>
               <div class="prop-description">
-                <p>This exceptional property at {{ property.location }} offers an outstanding living experience. With {{ property.beds }} bedrooms and {{ property.baths }} bathrooms across {{ property.sqft }} square feet, it represents one of the finest homes in the area.</p>
-                <p>Listed at ${{ property.price|floatformat:0 }}, this property is an excellent opportunity whether you are looking for a primary residence or a premium investment. Contact our specialists today to schedule a private viewing.</p>
+                {% if property.description %}
+                  <p>{{ property.description }}</p>
+                {% else %}
+                  <p>This exceptional property at {{ property.location }} offers an outstanding living experience. With {{ property.beds }} bedrooms and {{ property.baths }} bathrooms across {{ property.sqft }} square feet, it represents one of the finest homes in the area.</p>
+                  <p>
+                    {% if property.listing_type == 'rent' %}
+                      Available for rent at ${{ property.price|floatformat:0 }}/month, this is a rare opportunity to enjoy premium living without compromise. Contact our specialists to arrange a private viewing.
+                    {% else %}
+                      Listed at ${{ property.price|floatformat:0 }}, this property is an excellent opportunity whether you are looking for a primary residence or a premium investment. Contact our specialists today to schedule a private viewing.
+                    {% endif %}
+                  </p>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -143,17 +179,23 @@
           <!-- Features -->
           <div class="prop-tab-panel" id="tab-features">
             <div class="prop-section">
-              <h2 class="prop-section-title">Features and Amenities</h2>
-              <div class="features-group">
-                <ul class="features-list">
+              <h2 class="prop-section-title">Features &amp; Amenities</h2>
+              <ul class="features-list">
+                {% if property.features.all %}
+                  {% for feat in property.features.all %}
+                  <li><i class="fas fa-check"></i> {{ feat.feature }}</li>
+                  {% endfor %}
+                {% else %}
                   <li><i class="fas fa-check"></i> {{ property.beds }} spacious bedrooms</li>
                   <li><i class="fas fa-check"></i> {{ property.baths }} modern bathrooms</li>
                   <li><i class="fas fa-check"></i> {{ property.sqft }} sq ft of living space</li>
                   <li><i class="fas fa-check"></i> Premium finishes throughout</li>
                   <li><i class="fas fa-check"></i> Open-plan living areas</li>
                   <li><i class="fas fa-check"></i> Modern kitchen with quality appliances</li>
-                </ul>
-              </div>
+                  <li><i class="fas fa-check"></i> Private outdoor space</li>
+                  <li><i class="fas fa-check"></i> Dedicated parking</li>
+                {% endif %}
+              </ul>
             </div>
           </div>
 
@@ -161,13 +203,14 @@
           <div class="prop-tab-panel" id="tab-location">
             <div class="prop-section">
               <h2 class="prop-section-title">Location</h2>
-              <p class="prop-location-intro">{{ property.location }}</p>
+              <p class="prop-location-address">{{ property.location }}</p>
               <div class="map-placeholder">
                 <i class="fas fa-map-location-dot map-placeholder-icon"></i>
                 <p class="map-placeholder-text">{{ property.location }}</p>
                 <a href="https://maps.google.com/?q={{ property.location }}"
                    target="_blank" rel="noopener noreferrer"
-                   class="btn btn-navy map-open-btn">
+                   class="map-open-btn">
+                  <i class="fas fa-arrow-up-right-from-square"></i>
                   Open in Google Maps
                 </a>
               </div>
@@ -177,23 +220,39 @@
 
         <!-- SIDEBAR -->
         <aside class="property-sidebar" id="propertySidebar">
+
+          <!-- Agent Card -->
           <div class="sidebar-card agent-card">
             <div class="agent-top">
-              <img src="{% static 'images/agent1.jpg' %}" alt="James Harrington" class="agent-avatar" />
-              <div class="agent-info">
-                <p class="agent-role">Your Agent</p>
-                <h3 class="agent-name">James Harrington</h3>
-                <p class="agent-title">Senior Property Specialist</p>
-                <div class="agent-rating">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                  <span class="rating-count">(128 reviews)</span>
+              {% if property.agent %}
+                <img src="{{ property.agent.image.url }}" alt="{{ property.agent.name }}" class="agent-avatar" />
+                <div class="agent-info">
+                  <p class="agent-role">Your Agent</p>
+                  <h3 class="agent-name">{{ property.agent.name }}</h3>
+                  <p class="agent-title">{{ property.agent.role }}</p>
+                  <div class="agent-rating">
+                    {% for i in "12345" %}<i class="fas fa-star"></i>{% endfor %}
+                    <span class="rating-count">({{ property.agent.reviews_count }} reviews)</span>
+                  </div>
                 </div>
-              </div>
+              {% else %}
+                <img src="{% static 'images/agent1.jpg' %}" alt="James Harrington" class="agent-avatar" />
+                <div class="agent-info">
+                  <p class="agent-role">Your Agent</p>
+                  <h3 class="agent-name">James Harrington</h3>
+                  <p class="agent-title">Senior Property Specialist</p>
+                  <div class="agent-rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <span class="rating-count">(128 reviews)</span>
+                  </div>
+                </div>
+              {% endif %}
             </div>
             <div class="agent-contact-btns">
               <a href="tel:+13105550192" class="agent-btn agent-btn-phone">
-                <i class="fas fa-phone"></i> (310) 555-0192
+                <i class="fas fa-phone"></i>
+                {% if property.agent %}{{ property.agent.phone }}{% else %}(310) 555-0192{% endif %}
               </a>
               <a href="{% url 'contact' %}" class="agent-btn agent-btn-email">
                 <i class="fas fa-envelope"></i> Send Message
@@ -201,45 +260,59 @@
             </div>
           </div>
 
-          <!-- Mortgage Calculator -->
+          <!-- Mortgage / Rent Calculator -->
           <div class="sidebar-card mortgage-card">
             <h3 class="sidebar-card-title">
               <i class="fas fa-calculator"></i>
-              Mortgage Calculator
+              {% if property.listing_type == 'rent' %}Rent Summary{% else %}Mortgage Calculator{% endif %}
             </h3>
             <div class="mortgage-fields">
-              <div class="form-field">
-                <label class="form-label" for="mortgagePrice">Home Price ($)</label>
-                <input class="form-input" type="number" id="mortgagePrice" value="{{ property.price }}" />
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="mortgageDown">Down Payment ($)</label>
-                <input class="form-input" type="number" id="mortgageDown" value="{{ property.price|floatformat:0 }}" />
-              </div>
-              <div class="form-row">
+              {% if property.listing_type == 'rent' %}
                 <div class="form-field">
-                  <label class="form-label" for="mortgageRate">Interest Rate (%)</label>
-                  <input class="form-input" type="number" id="mortgageRate" value="6.8" step="0.1" />
+                  <label class="form-label">Monthly Rent</label>
+                  <input class="form-input" type="number" id="mortgagePrice" value="{{ property.price }}" readonly />
                 </div>
                 <div class="form-field">
-                  <label class="form-label" for="mortgageTerm">Term (years)</label>
-                  <select class="form-input form-select" id="mortgageTerm">
-                    <option value="30" selected>30 years</option>
-                    <option value="20">20 years</option>
-                    <option value="15">15 years</option>
-                  </select>
+                  <label class="form-label">Annual Cost</label>
+                  <input class="form-input" type="text" id="annualCost" readonly />
                 </div>
-              </div>
+              {% else %}
+                <div class="form-field">
+                  <label class="form-label" for="mortgagePrice">Home Price ($)</label>
+                  <input class="form-input" type="number" id="mortgagePrice" value="{{ property.price }}" />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="mortgageDown">Down Payment ($)</label>
+                  <input class="form-input" type="number" id="mortgageDown" value="0" />
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label" for="mortgageRate">Rate (%)</label>
+                    <input class="form-input" type="number" id="mortgageRate" value="6.8" step="0.1" />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="mortgageTerm">Term</label>
+                    <select class="form-input" id="mortgageTerm">
+                      <option value="30" selected>30 yr</option>
+                      <option value="20">20 yr</option>
+                      <option value="15">15 yr</option>
+                    </select>
+                  </div>
+                </div>
+              {% endif %}
             </div>
+            <button class="calc-btn" id="calcBtn">
+              {% if property.listing_type == 'rent' %}Calculate Annual Cost{% else %}Calculate Payment{% endif %}
+            </button>
             <div class="mortgage-result" id="mortgageResult">
-              <div class="mortgage-monthly">
-                <span class="mortgage-monthly-label">Estimated Monthly Payment</span>
-                <span class="mortgage-monthly-amount" id="mortgageMonthly">—</span>
-              </div>
+              <span class="mortgage-monthly-label">
+                {% if property.listing_type == 'rent' %}Annual Rent Cost{% else %}Est. Monthly Payment{% endif %}
+              </span>
+              <span class="mortgage-monthly-amount" id="mortgageMonthly">—</span>
             </div>
           </div>
-        </aside>
 
+        </aside>
       </div>
     </div>
   </section>
@@ -248,24 +321,24 @@
   {% if similar_properties %}
   <section class="similar-section">
     <div class="container">
-      <div class="section-header similar-header">
-        <p class="section-eyebrow">You May Also Like</p>
-        <h2 class="section-title">Similar Properties</h2>
-      </div>
+      <p class="section-eyebrow">You May Also Like</p>
+      <h2 class="section-title">Similar Properties</h2>
       <div class="similar-grid">
         {% for sim in similar_properties %}
         <article class="property-card" data-index="{{ forloop.counter0 }}">
           <div class="card-image-wrap">
-            <img src="{% static sim.image %}" alt="{{ sim.title }}" class="card-image" loading="lazy" />
-            <span class="card-badge {% if sim.badge == 'luxury' %}badge-luxury{% elif sim.badge == 'new' %}badge-new{% elif sim.badge == 'reduced' %}badge-reduced{% endif %}">
-              {% if sim.badge == 'sale' %}For Sale{% elif sim.badge == 'luxury' %}Luxury{% elif sim.badge == 'new' %}New{% else %}Reduced{% endif %}
+            <img src="{{ sim.image.url }}" alt="{{ sim.title }}" class="card-image" loading="lazy" />
+            <span class="card-badge {% if sim.badge == 'luxury' %}badge-luxury{% elif sim.badge == 'new' %}badge-new{% elif sim.badge == 'reduced' %}badge-reduced{% elif sim.listing_type == 'rent' %}badge-rent{% else %}badge-sale{% endif %}">
+              {% if sim.badge == 'luxury' %}Luxury{% elif sim.badge == 'new' %}New{% elif sim.badge == 'reduced' %}Reduced{% elif sim.listing_type == 'rent' %}For Rent{% else %}For Sale{% endif %}
             </span>
             <div class="card-overlay">
               <a href="{% url 'property' sim.id %}" class="card-overlay-btn">Quick View</a>
             </div>
           </div>
           <div class="card-body">
-            <div class="card-price">${{ sim.price|floatformat:0 }}</div>
+            <div class="card-price">
+              ${{ sim.price|floatformat:0 }}{% if sim.listing_type == 'rent' %}<span class="card-price-period">/mo</span>{% endif %}
+            </div>
             <h3 class="card-title">{{ sim.title }}</h3>
             <p class="card-location"><i class="fas fa-map-marker-alt"></i> {{ sim.location }}</p>
             <div class="card-meta">
@@ -279,10 +352,16 @@
         {% endfor %}
       </div>
       <div class="similar-cta">
-        <a href="{% url 'listings' %}" class="btn btn-navy">View All Listings</a>
+        <a href="{% url 'listings' %}" class="btn-navy">View All Listings</a>
       </div>
     </div>
   </section>
   {% endif %}
 
+{% endblock %}
+
+{% block extra_js %}
+{# Pass the listing type to JS cleanly via a data attribute — no inline JS needed #}
+<script>document.documentElement.dataset.listingType = '{{ property.listing_type }}';</script>
+<script src="{% static 'js/property.js' %}"></script>
 {% endblock %}

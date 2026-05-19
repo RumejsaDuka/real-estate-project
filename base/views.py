@@ -1,102 +1,93 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
-from django.contrib import messages
-from .models import Property, ContactMessage, TeamMember
-from .forms import ContactForm
+from django.shortcuts import render, get_object_or_404
+from .models import (
+    Property,
+    PropertyImage,
+    Agent,
+    PropertyFeature,
+    Inquiry
+)
 
 
-PROPERTIES_DATA = [
-    {'id': 1, 'title': 'Maple Ridge Family Home', 'location': 'Austin, Texas', 'price': 485000, 'beds': 4, 'baths': 3, 'sqft': 2340, 'badge': 'sale', 'image': 'images/maple.jpg', 'featured': False},
-    {'id': 2, 'title': 'Harborview Waterfront Villa', 'location': 'Miami, Florida', 'price': 1250000, 'beds': 6, 'baths': 5, 'sqft': 5100, 'badge': 'luxury', 'image': 'images/waterfront.jpg', 'featured': True},
-    {'id': 3, 'title': 'Westside Contemporary Townhouse', 'location': 'Denver, Colorado', 'price': 310000, 'beds': 3, 'baths': 2, 'sqft': 1780, 'badge': 'new', 'image': 'images/townhouse.webp', 'featured': False},
-    {'id': 4, 'title': 'Oakwood Estates Residence', 'location': 'Nashville, Tennessee', 'price': 675000, 'beds': 5, 'baths': 4, 'sqft': 3620, 'badge': 'sale', 'image': 'images/oakwood.jpg', 'featured': False},
-    {'id': 5, 'title': 'Summit Mountain Retreat', 'location': 'Aspen, Colorado', 'price': 540000, 'beds': 4, 'baths': 3, 'sqft': 2890, 'badge': 'reduced', 'image': 'images/mountain.jpg', 'featured': False},
-    {'id': 6, 'title': 'Downtown Loft Apartment', 'location': 'Chicago, Illinois', 'price': 228000, 'beds': 2, 'baths': 1, 'sqft': 1100, 'badge': 'new', 'image': 'images/loft.avif', 'featured': False},
-]
-
-TEAM_DATA = [
-    {'name': 'Sarah Mitchell', 'role': 'Founding Partner & CEO', 'bio': '15+ years of experience and a passion for matching people with the homes they deserve.', 'image': 'images/agent2.jpg'},
-    {'name': 'James Harrington', 'role': 'Senior Property Specialist', 'bio': 'Luxury residential expert across Florida and California with 12 years in the field.', 'image': 'images/agent1.jpg'},
-    {'name': 'David Park', 'role': 'Investment Advisor', 'bio': 'Expert in multi-family and commercial investment properties nationwide.', 'image': 'images/david.jpg'},
-    {'name': 'Elena Vasquez', 'role': "Buyer's Agent", 'bio': 'Specializes in guiding first-time buyers through every step of the process.', 'image': 'images/agent3.jpg'},
-]
-
-
+# HOME PAGE
 def index(request):
-    featured_properties = PROPERTIES_DATA[:6]
-    return render(request, 'index.html', {
-    'properties': featured_properties,
-})
+    featured_properties = Property.objects.filter(featured=True)[:6]
+
+    context = {
+        'featured_properties': featured_properties
+    }
+    return render(request, 'index.html', context)
 
 
+# LISTINGS PAGE
 def listings(request):
-    properties = PROPERTIES_DATA.copy()
-    
-    # Filters nga GET parameters
-    location = request.GET.get('location', '').lower()
-    max_price = request.GET.get('price', '')
-    min_beds = request.GET.get('beds', '')
-    prop_type = request.GET.get('type', '')
+    properties = Property.objects.all().order_by('-created_at')
 
+    location     = request.GET.get('location')
+    price        = request.GET.get('price')
+    beds         = request.GET.get('beds')
+    property_type = request.GET.get('type')
+    listing_type = request.GET.get('listing_type')   # ← NEW: 'sale' or 'rent'
+
+    # FILTERS
     if location:
-        properties = [p for p in properties if location in p['location'].lower()]
-    if max_price:
-        properties = [p for p in properties if p['price'] <= int(max_price)]
-    if min_beds:
-        properties = [p for p in properties if p['beds'] >= int(min_beds)]
-    if prop_type:
-        properties = [p for p in properties if p['badge'] == prop_type]
+        properties = properties.filter(location__icontains=location)
 
-    return render(request, 'listings.html', {
+    if price:
+        properties = properties.filter(price__lte=price)
+
+    if beds:
+        properties = properties.filter(beds__gte=beds)
+
+    if property_type:
+        properties = properties.filter(badge=property_type)
+
+    if listing_type:                                  # ← NEW
+        properties = properties.filter(listing_type=listing_type)
+
+    context = {
         'properties': properties,
-        'total_count': len(PROPERTIES_DATA),
-        'filtered_count': len(properties),
+        'total_count': Property.objects.count(),
+        'filtered_count': properties.count(),
         'filters': {
-            'location': request.GET.get('location', ''),
-            'price': max_price,
-            'beds': min_beds,
-            'type': prop_type,
+            'location':     location     or '',
+            'price':        price        or '',
+            'beds':         beds         or '',
+            'type':         property_type or '',
+            'listing_type': listing_type or '',       # ← NEW
         }
-    })
+    }
+    return render(request, 'listings.html', context)
 
 
-def about(request):
-    return render(request, 'about.html', {
-        'team': TEAM_DATA,
-    })
-
-
-def contact(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            ContactMessage.objects.create(
-                name=form.cleaned_data['name'],
-                email=form.cleaned_data['email'],
-                phone=form.cleaned_data.get('phone', ''),
-                interest=form.cleaned_data.get('interest', ''),
-                subject=form.cleaned_data['subject'],
-                message=form.cleaned_data['message'],
-            )
-            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                return JsonResponse({'success': True})
-            messages.success(request, 'Mesazhi u dërgua me sukses!')
-            return redirect('contact')
-        else:
-            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                return JsonResponse({'success': False, 'errors': form.errors})
-    else:
-        form = ContactForm()
-
-    return render(request, 'contact.html', {'form': form})
-
-
+# SINGLE PROPERTY PAGE
 def property_detail(request, pk):
-    # Gjej property nga lista statike (ose nga DB)
-    prop = next((p for p in PROPERTIES_DATA if p['id'] == pk), PROPERTIES_DATA[1])
-    similar = [p for p in PROPERTIES_DATA if p['id'] != pk and p['badge'] == prop.get('badge')][:3]
-    
-    return render(request, 'property.html', {
-        'property': prop,
-        'similar_properties': similar,
-    })
+    property = get_object_or_404(Property, id=pk)
+
+    # Pull similar listings of the SAME type (sale/rent) first,
+    # fall back to any 3 if not enough.
+    similar_properties = (
+        Property.objects
+        .exclude(id=property.id)
+        .filter(listing_type=property.listing_type)
+        .order_by('-created_at')[:3]
+    )
+    if similar_properties.count() < 3:
+        similar_properties = Property.objects.exclude(id=property.id)[:3]
+
+    context = {
+        'property': property,
+        'similar_properties': similar_properties,
+    }
+    return render(request, 'property.html', context)
+
+
+# CONTACT PAGE
+def contact(request):
+    return render(request, 'contact.html')
+
+
+# ABOUT PAGE
+def about(request):
+    agents = Agent.objects.all()
+    context = {'agents': agents}
+    return render(request, 'about.html', context)

@@ -2,11 +2,18 @@
 {% load static %}
 
 {% block title %}All Listings - Grand Realty{% endblock %}
-{% block page_css %}<link rel="stylesheet" href="{% static 'css/listings.css' %}" />{% endblock %}
 {% block nav_listings %}active{% endblock %}
+
+{% block extra_head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/listings.css' %}">
+{% endblock %}
 
 {% block content %}
 
+  <!-- HERO -->
   <section class="listings-hero">
     <div class="listings-hero-bg">
       <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1800&q=80" alt="Luxury homes" class="listings-hero-img" />
@@ -47,11 +54,11 @@
         <div class="filter-divider"></div>
         <div class="filter-group">
           <label class="filter-label"><i class="fas fa-dollar-sign"></i> Max Price</label>
-          <select class="filter-input filter-select" name="price" id="filterPrice">
+          <select class="filter-input" name="price" id="filterPrice">
             <option value="">Any Price</option>
-            <option value="300000" {% if filters.price == '300000' %}selected{% endif %}>Up to $300K</option>
-            <option value="500000" {% if filters.price == '500000' %}selected{% endif %}>Up to $500K</option>
-            <option value="750000" {% if filters.price == '750000' %}selected{% endif %}>Up to $750K</option>
+            <option value="300000"  {% if filters.price == '300000'  %}selected{% endif %}>Up to $300K</option>
+            <option value="500000"  {% if filters.price == '500000'  %}selected{% endif %}>Up to $500K</option>
+            <option value="750000"  {% if filters.price == '750000'  %}selected{% endif %}>Up to $750K</option>
             <option value="1000000" {% if filters.price == '1000000' %}selected{% endif %}>Up to $1M</option>
             <option value="2000000" {% if filters.price == '2000000' %}selected{% endif %}>Up to $2M</option>
           </select>
@@ -59,7 +66,7 @@
         <div class="filter-divider"></div>
         <div class="filter-group">
           <label class="filter-label"><i class="fas fa-bed"></i> Bedrooms</label>
-          <select class="filter-input filter-select" name="beds" id="filterBeds">
+          <select class="filter-input" name="beds" id="filterBeds">
             <option value="">Any Beds</option>
             <option value="1" {% if filters.beds == '1' %}selected{% endif %}>1+ Beds</option>
             <option value="2" {% if filters.beds == '2' %}selected{% endif %}>2+ Beds</option>
@@ -70,18 +77,25 @@
         </div>
         <div class="filter-divider"></div>
         <div class="filter-group">
-          <label class="filter-label"><i class="fas fa-tag"></i> Type</label>
-          <select class="filter-input filter-select" name="type" id="filterType">
+          <label class="filter-label"><i class="fas fa-tag"></i> Listing Type</label>
+          <select class="filter-input" name="listing_type" id="filterListingType">
+            <option value="">Sale &amp; Rent</option>
+            <option value="sale" {% if filters.listing_type == 'sale' %}selected{% endif %}>For Sale</option>
+            <option value="rent" {% if filters.listing_type == 'rent' %}selected{% endif %}>For Rent</option>
+          </select>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="filter-group">
+          <label class="filter-label"><i class="fas fa-star"></i> Type</label>
+          <select class="filter-input" name="type" id="filterType">
             <option value="">All Types</option>
-            <option value="luxury" {% if filters.type == 'luxury' %}selected{% endif %}>Luxury</option>
-            <option value="new" {% if filters.type == 'new' %}selected{% endif %}>New Listing</option>
+            <option value="luxury"  {% if filters.type == 'luxury'  %}selected{% endif %}>Luxury</option>
+            <option value="new"     {% if filters.type == 'new'     %}selected{% endif %}>New Listing</option>
             <option value="reduced" {% if filters.type == 'reduced' %}selected{% endif %}>Price Reduced</option>
-            <option value="sale" {% if filters.type == 'sale' %}selected{% endif %}>For Sale</option>
           </select>
         </div>
         <button type="submit" class="filter-search-btn">
-          <i class="fas fa-search"></i>
-          <span>Search</span>
+          <i class="fas fa-search"></i><span>Search</span>
         </button>
         <a href="{% url 'listings' %}" class="filter-reset-btn" title="Reset filters">
           <i class="fas fa-rotate-left"></i>
@@ -95,12 +109,14 @@
     <div class="container">
       <div class="results-bar">
         <div class="results-count">
-          Showing <span id="resultsCount">{{ filtered_count }}</span> properties
+          Showing <span id="resultsCount">{{ filtered_count }}</span>
+          {% if filtered_count == 1 %}property{% else %}properties{% endif %}
+          {% if filters.listing_type == 'rent' %}&nbsp;for rent{% elif filters.listing_type == 'sale' %}&nbsp;for sale{% endif %}
         </div>
         <div class="results-controls">
           <div class="view-toggle">
-            <button class="view-btn active" id="viewGrid" aria-label="Grid view"><i class="fas fa-grip"></i></button>
-            <button class="view-btn" id="viewList" aria-label="List view"><i class="fas fa-list"></i></button>
+            <button class="view-btn active" id="viewGrid" aria-label="Grid view" title="Grid view"><i class="fas fa-grip"></i></button>
+            <button class="view-btn" id="viewList" aria-label="List view" title="List view"><i class="fas fa-list"></i></button>
           </div>
         </div>
       </div>
@@ -111,30 +127,35 @@
                  data-price="{{ prop.price }}"
                  data-beds="{{ prop.beds }}"
                  data-type="{{ prop.badge }}"
+                 data-listing-type="{{ prop.listing_type }}"
                  data-location="{{ prop.location|lower }}"
                  data-sqft="{{ prop.sqft }}">
           <div class="card-image-wrap">
-            <img src="{% static prop.image %}" alt="{{ prop.title }}" class="card-image" loading="lazy" />
-            <span class="card-badge
-              {% if prop.badge == 'luxury' %}badge-luxury
-              {% elif prop.badge == 'new' %}badge-new
-              {% elif prop.badge == 'reduced' %}badge-reduced
-              {% endif %}">
-              {% if prop.badge == 'sale' %}For Sale
-              {% elif prop.badge == 'luxury' %}Luxury
-              {% elif prop.badge == 'new' %}New
-              {% elif prop.badge == 'reduced' %}Reduced
-              {% endif %}
+            <img src="{{ prop.image.url }}" alt="{{ prop.title }}" class="card-image" loading="lazy" />
+
+            {% if prop.badge %}
+            <span class="card-badge {% if prop.badge == 'luxury' %}badge-luxury{% elif prop.badge == 'new' %}badge-new{% elif prop.badge == 'reduced' %}badge-reduced{% endif %}">
+              {% if prop.badge == 'luxury' %}✦ Luxury{% elif prop.badge == 'new' %}New{% elif prop.badge == 'reduced' %}Reduced{% endif %}
             </span>
+            {% endif %}
+
+            <span class="card-listing-type {% if prop.listing_type == 'rent' %}rent{% endif %}">
+              {% if prop.listing_type == 'rent' %}For Rent{% else %}For Sale{% endif %}
+            </span>
+
             <div class="card-overlay">
               <a href="{% url 'property' prop.id %}" class="card-overlay-btn">Quick View</a>
             </div>
+
             {% if prop.featured %}
             <div class="featured-ribbon"><i class="fas fa-star"></i> Featured</div>
             {% endif %}
           </div>
+
           <div class="card-body">
-            <div class="card-price">${{ prop.price|floatformat:0 }}</div>
+            <div class="card-price">
+              ${{ prop.price|floatformat:0 }}{% if prop.listing_type == 'rent' %}<span class="card-price-period">/mo</span>{% endif %}
+            </div>
             <h3 class="card-title">{{ prop.title }}</h3>
             <p class="card-location"><i class="fas fa-map-marker-alt"></i> {{ prop.location }}</p>
             <div class="card-meta">
@@ -149,12 +170,10 @@
         </article>
         {% empty %}
         <div class="no-results" id="noResults">
-          <div class="no-results-inner">
-            <i class="fas fa-house-circle-xmark no-results-icon"></i>
-            <h3 class="no-results-title">No Properties Found</h3>
-            <p class="no-results-text">Try adjusting your filters to see more listings.</p>
-            <a href="{% url 'listings' %}" class="btn btn-navy">Reset Filters</a>
-          </div>
+          <i class="fas fa-house-circle-xmark no-results-icon"></i>
+          <h3 class="no-results-title">No Properties Found</h3>
+          <p class="no-results-text">Try adjusting your filters to see more listings.</p>
+          <a href="{% url 'listings' %}" class="btn-navy">Reset Filters</a>
         </div>
         {% endfor %}
       </div>
@@ -163,19 +182,17 @@
 
   <!-- CTA -->
   <section class="listings-cta">
-    <div class="listings-cta-inner">
-      <div class="listings-cta-bg">
-        <img src="{% static 'images/agent.webp' %}" alt="Speak to an agent" class="listings-cta-img" />
-        <div class="listings-cta-overlay"></div>
-      </div>
-      <div class="container listings-cta-content">
-        <p class="section-eyebrow">Can't Find What You're Looking For?</p>
-        <h2 class="listings-cta-title">Let Our Experts Find<br />Your Perfect Home</h2>
-        <p class="listings-cta-sub">Our agents have access to thousands of off-market and exclusive properties not listed here.</p>
-        <div class="listings-cta-actions">
-          <a href="{% url 'contact' %}" class="btn btn-gold">Talk to an Agent</a>
-          <a href="{% url 'contact' %}" class="btn btn-outline-white">Schedule a Call</a>
-        </div>
+    <div class="listings-cta-bg">
+      <img src="{% static 'images/agent.webp' %}" alt="Speak to an agent" class="listings-cta-img" />
+      <div class="listings-cta-overlay"></div>
+    </div>
+    <div class="container listings-cta-content">
+      <p class="section-eyebrow">Can't Find What You're Looking For?</p>
+      <h2 class="listings-cta-title">Let Our Experts Find<br />Your Perfect Home</h2>
+      <p class="listings-cta-sub">Our agents have access to thousands of off-market and exclusive properties not listed here.</p>
+      <div class="listings-cta-actions">
+        <a href="{% url 'contact' %}" class="btn-gold">Talk to an Agent</a>
+        <a href="{% url 'contact' %}" class="btn-outline-white">Schedule a Call</a>
       </div>
     </div>
   </section>
