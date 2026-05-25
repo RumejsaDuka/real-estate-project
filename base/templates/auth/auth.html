@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+
+{% block title %}Llogaria jote - Grand Realty{% endblock %}
+{% block nav_account %}active{% endblock %}
+
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-panel">
+    <div class="auth-copy">
+      <p class="section-eyebrow">Grand Realty</p>
+      <h1>Llogaria jote</h1>
+      <p>Hyr ose krijo llogari per te shtuar prona, per te ruajtur favorite dhe per te derguar mesazhe.</p>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-tabs" role="tablist" aria-label="Zgjidh hyrje ose regjistrim">
+        <button class="auth-tab {% if active_tab == 'login' %}active{% endif %}" type="button" data-auth-tab="login">Hyr</button>
+        <button class="auth-tab {% if active_tab == 'register' %}active{% endif %}" type="button" data-auth-tab="register">Regjistrohu</button>
+      </div>
+
+      <div class="auth-pane {% if active_tab == 'login' %}active{% endif %}" data-auth-pane="login">
+        <h2>Hyr ne llogari</h2>
+        <form method="post" class="simple-form">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="login" />
+          {% if login_form.non_field_errors %}
+            <div class="form-alert">{{ login_form.non_field_errors.0 }}</div>
+          {% endif %}
+          {% for field in login_form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="cf-error">{{ field.errors.0 }}</div>{% endif %}
+          {% endfor %}
+          <button type="submit" class="btn btn-navy">Hyr</button>
+        </form>
+      </div>
+
+      <div class="auth-pane {% if active_tab == 'register' %}active{% endif %}" data-auth-pane="register">
+        <h2>Krijo llogari</h2>
+        <form method="post" class="simple-form">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="register" />
+          {% if register_form.non_field_errors %}
+            <div class="form-alert">{{ register_form.non_field_errors.0 }}</div>
+          {% endif %}
+          {% for field in register_form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="cf-error">{{ field.errors.0 }}</div>{% endif %}
+          {% endfor %}
+          <button type="submit" class="btn btn-navy">Regjistrohu</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.querySelectorAll('[data-auth-tab]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = button.dataset.authTab;
+      document.querySelectorAll('[data-auth-tab]').forEach((tab) => {
+        tab.classList.toggle('active', tab.dataset.authTab === target);
+      });
+      document.querySelectorAll('[data-auth-pane]').forEach((pane) => {
+        pane.classList.toggle('active', pane.dataset.authPane === target);
+      });
+    });
+  });
+</script>
+{% endblock %}

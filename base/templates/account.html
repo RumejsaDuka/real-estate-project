@@ -1,0 +1,155 @@
+{% extends 'main.html' %}
+
+{% block title %}Llogaria jote - Grand Realty{% endblock %}
+{% block nav_account %}active{% endblock %}
+
+{% block content %}
+<section class="dashboard-section account-dashboard">
+  <div class="container">
+    <div class="account-hero">
+      <div>
+        <p class="section-eyebrow">Dashboard</p>
+        <h1>Llogaria jote</h1>
+        <p>Menaxho pronat, favoritet dhe mesazhet nga nje vend i vetem.</p>
+      </div>
+      <div class="account-hero-actions">
+        <a href="{% url 'property_create' %}" class="btn btn-gold"><i class="fas fa-plus"></i> Shto prone</a>
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-navy">Dil nga llogaria</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="account-grid">
+      <aside class="account-sidebar" aria-label="Navigimi i dashboard-it">
+        <a href="#favorites"><i class="fas fa-heart"></i> Favorites</a>
+        <a href="#my-properties"><i class="fas fa-house"></i> Pronat e mia</a>
+        <a href="#messages"><i class="fas fa-message"></i> Mesazhet</a>
+        <a href="#settings"><i class="fas fa-gear"></i> Settings</a>
+      </aside>
+
+      <div class="account-main">
+        <section class="account-section-card" id="favorites">
+          <div class="section-row">
+            <div>
+              <p class="section-eyebrow">Te ruajtura</p>
+              <h2>Favorites</h2>
+            </div>
+            <a href="{% url 'listings' %}" class="mini-link">Shfleto prona</a>
+          </div>
+          <div class="account-card-grid">
+            {% for favorite in favorites %}
+              {% with prop=favorite.property %}
+              <article class="mini-property-card">
+                <img src="{{ prop.image.url }}" alt="{{ prop.title }}" />
+                <div>
+                  <strong>{{ prop.title }}</strong>
+                  <span>{{ prop.location }}</span>
+                  <small>${{ prop.price|floatformat:0 }}</small>
+                </div>
+                <form method="post" action="{% url 'toggle_favorite' prop.id %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ request.get_full_path }}#favorites" />
+                  <button type="submit" class="icon-action" aria-label="Hiq nga favoritet"><i class="fas fa-heart"></i></button>
+                </form>
+              </article>
+              {% endwith %}
+            {% empty %}
+              <div class="empty-state compact">
+                <h3>Nuk keni favorite ende</h3>
+                <p>Ruani pronat qe ju pelqejne per t'i gjetur shpejt me vone.</p>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section class="account-section-card" id="my-properties">
+          <div class="section-row">
+            <div>
+              <p class="section-eyebrow">Publikimet</p>
+              <h2>Pronat e mia</h2>
+            </div>
+            <a href="{% url 'property_create' %}" class="mini-link">Shto prone</a>
+          </div>
+          <div class="account-card-grid">
+            {% for prop in my_properties %}
+              <article class="mini-property-card">
+                <img src="{{ prop.image.url }}" alt="{{ prop.title }}" />
+                <div>
+                  <strong>{{ prop.title }}</strong>
+                  <span>{{ prop.location }}</span>
+                  <small>${{ prop.price|floatformat:0 }}</small>
+                </div>
+                <div class="mini-actions">
+                  <a href="{% url 'property_update' prop.id %}" class="icon-action" aria-label="Edito pronen"><i class="fas fa-pen"></i></a>
+                  <a href="{% url 'property_detail' prop.id %}" class="icon-action" aria-label="Shiko pronen"><i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+              </article>
+            {% empty %}
+              <div class="empty-state compact">
+                <h3>Nuk keni postuar prona</h3>
+                <p>Shtoni pronen tuaj te pare per ta publikuar ne platforme.</p>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section class="account-section-card" id="messages">
+          <div class="section-row">
+            <div>
+              <p class="section-eyebrow">Komunikimi</p>
+              <h2>Mesazhet</h2>
+            </div>
+          </div>
+          <div class="message-layout">
+            <div class="message-panel embedded">
+              <h3>Inbox</h3>
+              {% for message in received_messages %}
+                <article class="message-item">
+                  <div>
+                    <strong>{{ message.sender.username }}</strong>
+                    {% if message.property %}<a href="{{ message.property.get_absolute_url }}">{{ message.property.title }}</a>{% endif %}
+                  </div>
+                  <p>{{ message.text }}</p>
+                  <time>{{ message.created_at|date:"d M Y, H:i" }}</time>
+                </article>
+              {% empty %}
+                <p class="muted-text">Nuk keni mesazhe te marra.</p>
+              {% endfor %}
+            </div>
+            <div class="message-panel embedded">
+              <h3>Te derguara</h3>
+              {% for message in sent_messages %}
+                <article class="message-item">
+                  <div>
+                    <strong>Per {{ message.receiver.username }}</strong>
+                    {% if message.property %}<a href="{{ message.property.get_absolute_url }}">{{ message.property.title }}</a>{% endif %}
+                  </div>
+                  <p>{{ message.text }}</p>
+                  <time>{{ message.created_at|date:"d M Y, H:i" }}</time>
+                </article>
+              {% empty %}
+                <p class="muted-text">Nuk keni mesazhe te derguara.</p>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+
+        <section class="account-section-card" id="settings">
+          <div class="section-row">
+            <div>
+              <p class="section-eyebrow">Profili</p>
+              <h2>Settings</h2>
+            </div>
+          </div>
+          <div class="settings-list">
+            <div><span>Perdoruesi</span><strong>{{ user.username }}</strong></div>
+            <div><span>Email</span><strong>{{ user.email|default:"Pa email" }}</strong></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

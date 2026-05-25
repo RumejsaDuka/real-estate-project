@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +20,6 @@
 </head>
 <body class="{% block body_class %}{% endblock %}">
 
-  <!-- NAVBAR -->
   <header class="navbar {% block navbar_class %}inner-page{% endblock %}" id="navbar">
     <div class="nav-container">
       <a href="{% url 'index' %}" class="nav-logo">
@@ -28,18 +27,22 @@
         <span class="logo-text">Grand Realty</span>
       </a>
       <nav class="nav-links" id="navLinks">
-        <a href="{% url 'index' %}" class="nav-link {% block nav_home %}{% endblock %}">Home</a>
-        <a href="{% url 'listings' %}" class="nav-link {% block nav_listings %}{% endblock %}">Listings</a>
-        <a href="{% url 'about' %}" class="nav-link {% block nav_about %}{% endblock %}">About</a>
-        <a href="{% url 'contact' %}" class="nav-link {% block nav_contact %}{% endblock %}">Contact</a>
+        <a href="{% url 'index' %}" class="nav-link {% block nav_home %}{% endblock %}">Kryefaqja</a>
+        <a href="{% url 'listings' %}" class="nav-link {% block nav_listings %}{% endblock %}">Pronat</a>
+        <a href="{% url 'currency_identifier' %}" class="nav-link {% block nav_currency %}{% endblock %}">Identifikuesi</a>
+        <a href="{% url 'about' %}" class="nav-link {% block nav_about %}{% endblock %}">Rreth nesh</a>
+        <a href="{% url 'contact' %}" class="nav-link {% block nav_contact %}{% endblock %}">Kontakt</a>
+        <a href="{% if user.is_authenticated %}{% url 'account' %}{% else %}{% url 'login' %}{% endif %}" class="nav-link nav-account-link {% block nav_account %}{% endblock %}">
+          <i class="fas fa-user-circle" aria-hidden="true"></i>
+          <span>Llogaria jote</span>
+        </a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="navToggle" aria-label="Hap navigimin">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- Django messages -->
   {% if messages %}
     <div class="django-messages">
       {% for message in messages %}
@@ -55,7 +58,6 @@
     {% block content %}{% endblock %}
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -64,7 +66,7 @@
             <span class="logo-icon-text">G</span>
             <span class="logo-text">Grand Realty</span>
           </a>
-          <p class="footer-tagline">Your trusted partner in finding the perfect property since 2009.</p>
+          <p class="footer-tagline">Partneri juaj i besuar per te gjetur pronen ideale qe nga viti 2009.</p>
           <div class="footer-social">
             <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -73,26 +75,26 @@
           </div>
         </div>
         <div class="footer-col">
-          <h4 class="footer-heading">Quick Links</h4>
+          <h4 class="footer-heading">Linqe te shpejta</h4>
           <ul class="footer-links">
-            <li><a href="{% url 'index' %}" class="footer-link">Home</a></li>
-            <li><a href="{% url 'listings' %}" class="footer-link">All Listings</a></li>
-            <li><a href="{% url 'about' %}" class="footer-link">About Us</a></li>
-            <li><a href="{% url 'contact' %}" class="footer-link">Contact</a></li>
+            <li><a href="{% url 'index' %}" class="footer-link">Kryefaqja</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Te gjitha pronat</a></li>
+            <li><a href="{% url 'about' %}" class="footer-link">Rreth nesh</a></li>
+            <li><a href="{% url 'contact' %}" class="footer-link">Kontakt</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-heading">Property Types</h4>
+          <h4 class="footer-heading">Lloje pronash</h4>
           <ul class="footer-links">
-            <li><a href="{% url 'listings' %}" class="footer-link">Single Family Homes</a></li>
-            <li><a href="{% url 'listings' %}" class="footer-link">Condos and Apartments</a></li>
-            <li><a href="{% url 'listings' %}" class="footer-link">Townhouses</a></li>
-            <li><a href="{% url 'listings' %}" class="footer-link">Luxury Estates</a></li>
-            <li><a href="{% url 'listings' %}" class="footer-link">Commercial</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Shtepi familjare</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Apartamente</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Vila</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Prona luksoze</a></li>
+            <li><a href="{% url 'listings' %}" class="footer-link">Komerciale</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-heading">Contact Us</h4>
+          <h4 class="footer-heading">Na kontaktoni</h4>
           <ul class="footer-contact-list">
             <li><i class="fas fa-map-marker-alt footer-contact-icon"></i><span>1420 Harbor Blvd, Suite 300<br />Los Angeles, CA 90012</span></li>
             <li><i class="fas fa-phone footer-contact-icon"></i><span>(310) 555-0192</span></li>
@@ -102,11 +104,11 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2025 Grand Realty. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 Grand Realty. Te gjitha te drejtat e rezervuara.</p>
         <div class="footer-bottom-links">
-          <a href="#" class="footer-bottom-link">Privacy Policy</a>
-          <a href="#" class="footer-bottom-link">Terms of Service</a>
-          <a href="#" class="footer-bottom-link">Sitemap</a>
+          <a href="#" class="footer-bottom-link">Privatesia</a>
+          <a href="#" class="footer-bottom-link">Kushtet</a>
+          <a href="#" class="footer-bottom-link">Harta e faqes</a>
         </div>
       </div>
     </div>

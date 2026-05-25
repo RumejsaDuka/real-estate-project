@@ -1,55 +1,53 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %}About Us - Grand Realty{% endblock %}
+{% block title %}Rreth nesh - Grand Realty{% endblock %}
 {% block page_css %}<link rel="stylesheet" href="{% static 'css/about.css' %}" />{% endblock %}
 {% block nav_about %}active{% endblock %}
 
 {% block content %}
 
-  <!-- HERO -->
   <section class="about-hero">
-    <img src="{% static 'images/abouthero.jpg' %}" alt="Grand Realty office" class="about-hero-img" />
+    <img src="{% static 'images/abouthero.jpg' %}" alt="Zyra Grand Realty" class="about-hero-img" />
     <div class="about-hero-overlay"></div>
     <div class="about-hero-content">
-      <p class="section-eyebrow">Our Story</p>
-      <h1 class="about-hero-title">More Than a Brokerage<br /><span class="about-hero-accent">A Trusted Partner</span></h1>
-      <p class="about-hero-sub">Since 2009, we've helped thousands of families and investors find their perfect property across America.</p>
+      <p class="section-eyebrow">Historia jone</p>
+      <h1 class="about-hero-title">Me shume se agjenci<br /><span class="about-hero-accent">partner i besuar</span></h1>
+      <p class="about-hero-sub">Qe nga viti 2009 ndihmojme familje, bleres dhe investitore te gjejne pronen e duhur.</p>
     </div>
   </section>
 
-  <!-- STORY -->
   <section class="story-section">
     <div class="container">
       <div class="story-layout">
         <div class="story-img-wrap">
-          <img src="{% static 'images/team.jpg' %}" alt="Grand Realty team" class="story-img" />
+          <img src="{% static 'images/team.jpg' %}" alt="Ekipi Grand Realty" class="story-img" />
         </div>
         <div class="story-text">
-          <p class="section-eyebrow">Who We Are</p>
-          <h2>Dedicated to Finding <em>Your</em> Perfect Home</h2>
-          <p>Grand Realty was founded in Los Angeles in 2009 with a singular vision: to bring honesty, expertise, and genuine care to every real estate transaction. What started as a small boutique agency has grown into one of the most trusted names in premium property across the country.</p>
-          <p>We specialize in luxury residential sales, investment properties, and first-time buyer guidance, offering a full-service experience from initial search to closing day and beyond.</p>
+          <p class="section-eyebrow">Kush jemi</p>
+          <h2>Te perkushtuar per te gjetur pronen qe ju pershtatet</h2>
+          <p>Grand Realty u krijua me nje qellim te thjeshte: ta beje procesin e gjetjes se prones me te qarte, me te sigurt dhe me njerezor. Ne punojme me kujdes ne cdo hap, nga kerkimi fillestar deri te komunikimi final.</p>
+          <p>Platforma jone bashkon lista pronash, favorite, mesazhe dhe dashboard personal, qe perdoruesit te menaxhojne gjithcka ne nje vend.</p>
           <div class="story-highlights">
             <div class="story-highlight">
               <div class="sh-icon"><i class="fas fa-handshake"></i></div>
               <div class="sh-text">
-                <strong>Client-First Philosophy</strong>
-                <span>Every decision we make is guided by what's truly best for our clients.</span>
+                <strong>Klienti ne qender</strong>
+                <span>Cdo vendim merret duke pasur parasysh nevojat reale te perdoruesit.</span>
               </div>
             </div>
             <div class="story-highlight">
               <div class="sh-icon"><i class="fas fa-map"></i></div>
               <div class="sh-text">
-                <strong>Deep Market Knowledge</strong>
-                <span>Our agents deliver insights you won't find anywhere online.</span>
+                <strong>Informacion i qarte</strong>
+                <span>Detaje te pastra per pronat, cmimet, vendndodhjen dhe kontaktin.</span>
               </div>
             </div>
             <div class="story-highlight">
               <div class="sh-icon"><i class="fas fa-shield-halved"></i></div>
               <div class="sh-text">
-                <strong>End-to-End Support</strong>
-                <span>From pre-approval to moving day, we're with you every step.</span>
+                <strong>Proces i sigurt</strong>
+                <span>Funksione per usera te loguar, favorite personale dhe mesazhe te organizuara.</span>
               </div>
             </div>
           </div>
@@ -58,55 +56,66 @@
     </div>
   </section>
 
-  <!-- VALUES -->
   <section class="values-section">
     <div class="container">
       <div class="section-header">
-        <p class="section-eyebrow">What Drives Us</p>
-        <h2 class="section-title">Our Core Values</h2>
-        <p class="section-subtitle">The principles that have guided every transaction and relationship since day one.</p>
+        <p class="section-eyebrow">Cfare na udheheq</p>
+        <h2 class="section-title">Vlerat tona</h2>
+        <p class="section-subtitle">Parime te thjeshta qe e mbajne platformen te qarte, te dobishme dhe te besueshme.</p>
       </div>
       <div class="values-grid">
         <div class="value-card">
           <div class="value-icon"><i class="fas fa-star"></i></div>
-          <h3>Excellence</h3>
-          <p>We hold ourselves to the highest standard in every aspect of our work.</p>
+          <h3>Cilesi</h3>
+          <p>Synojme prezantim te paster dhe funksione qe jane realisht te dobishme.</p>
         </div>
         <div class="value-card">
           <div class="value-icon"><i class="fas fa-eye"></i></div>
-          <h3>Transparency</h3>
-          <p>No hidden fees, no surprises. Just open communication at every stage.</p>
+          <h3>Transparence</h3>
+          <p>Informacion i thjeshte per prona, cmime dhe komunikim me pronarin.</p>
         </div>
         <div class="value-card">
           <div class="value-icon"><i class="fas fa-heart"></i></div>
-          <h3>Integrity</h3>
-          <p>We earn your trust by doing the right thing, even when it's not the easy thing.</p>
+          <h3>Besim</h3>
+          <p>Userat kane hapesiren e tyre per te ruajtur, postuar dhe menaxhuar prona.</p>
         </div>
         <div class="value-card">
           <div class="value-icon"><i class="fas fa-users"></i></div>
-          <h3>Community</h3>
-          <p>We're deeply invested in the neighborhoods and communities we serve.</p>
+          <h3>Komunitet</h3>
+          <p>Ndertojme nje vend ku bleresit, pronaret dhe qiramarresit lidhen me lehte.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TEAM -->
   <section class="team-section">
     <div class="container">
       <div class="section-header">
-        <p class="section-eyebrow">The People Behind the Results</p>
-        <h2 class="section-title-dark">Meet Our Team</h2>
-        <p class="section-subtitle-dark">Passionate professionals who bring knowledge and care to every client relationship.</p>
+        <p class="section-eyebrow">Ekipi</p>
+        <h2 class="section-title-dark">Njerezit pas platformes</h2>
+        <p class="section-subtitle-dark">Profesioniste qe ndihmojne ne prezantimin dhe menaxhimin e pronave.</p>
       </div>
+
       <div class="team-grid">
         {% for member in agents %}
         <div class="team-card">
           <div class="team-img-wrap">
             <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-img" />
             <div class="team-overlay">
-              <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+              {% if member.linkedin %}
+                <a href="{{ member.linkedin }}" class="team-social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              {% endif %}
+              {% if member.email %}
+                <a href="mailto:{{ member.email }}" class="team-social-link" aria-label="Email">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              {% else %}
+                <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              {% endif %}
             </div>
           </div>
           <div class="team-body">
@@ -126,36 +135,8 @@
           </div>
           <div class="team-body">
             <div class="team-name">James Harrington</div>
-            <div class="team-role">Senior Property Specialist</div>
-            <p class="team-bio">Focused on premium residential sales and private client advisory.</p>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-img-wrap">
-            <img src="{% static 'images/agent2.jpg' %}" alt="Maya Collins" class="team-img" />
-            <div class="team-overlay">
-              <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-          <div class="team-body">
-            <div class="team-name">Maya Collins</div>
-            <div class="team-role">Investment Advisor</div>
-            <p class="team-bio">Guides buyers through market analysis, negotiation, and portfolio growth.</p>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-img-wrap">
-            <img src="{% static 'images/agent3.jpg' %}" alt="Daniel Reyes" class="team-img" />
-            <div class="team-overlay">
-              <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="{% url 'contact' %}" class="team-social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-          <div class="team-body">
-            <div class="team-name">Daniel Reyes</div>
-            <div class="team-role">Leasing Consultant</div>
-            <p class="team-bio">Helps clients compare neighborhoods, terms, and long-term rental value.</p>
+            <div class="team-role">Specialist pronash</div>
+            <p class="team-bio">Ndihmon klientet me prezantimin, kerkimin dhe krahasimin e pronave.</p>
           </div>
         </div>
         {% endfor %}
@@ -163,7 +144,4 @@
     </div>
   </section>
 
-{% endblock %}
-
-{% block extra_js %}
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block title %}{% if object %}Edito prone{% else %}Shto prone{% endif %} - Grand Realty{% endblock %}
+{% block nav_add %}active{% endblock %}
+
+{% block content %}
+<section class="account-section">
+  <div class="account-card account-card-wide">
+    <p class="section-eyebrow">{% if object %}Perditeso publikimin{% else %}Prone e re{% endif %}</p>
+    <h1>{% if object %}Edito prone{% else %}Shto prone{% endif %}</h1>
+    <form method="post" enctype="multipart/form-data" class="simple-form two-column-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="{% if field.name == 'description' or field.name == 'image' %}form-span{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<div class="cf-error">{{ field.errors.0 }}</div>{% endif %}
+        </div>
+      {% endfor %}
+      <div class="form-span">
+        <button type="submit" class="btn btn-navy">{% if object %}Ruaj ndryshimet{% else %}Publiko pronen{% endif %}</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

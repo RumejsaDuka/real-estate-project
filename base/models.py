@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.db.models import Q
 from django.urls import reverse
 
 
@@ -13,13 +15,24 @@ class PropertyQuerySet(models.QuerySet):
         return self.filter(listing_type=Property.ListingType.RENT)
 
     def with_listing_relations(self):
-        return self.select_related('agent').prefetch_related('gallery', 'features')
+        return self.select_related('agent', 'owner').prefetch_related('gallery', 'features')
 
-    def search(self, *, location='', max_price='', min_beds='', badge='', listing_type=''):
+    def search(self, *, query='', location='', min_price='', max_price='', min_beds='', badge='', listing_type=''):
         queryset = self
+
+        if query:
+            clean_query = query.strip()
+            queryset = queryset.filter(
+                Q(title__icontains=clean_query) |
+                Q(location__icontains=clean_query) |
+                Q(description__icontains=clean_query)
+            )
 
         if location:
             queryset = queryset.filter(location__icontains=location.strip())
+
+        if min_price:
+            queryset = queryset.filter(price__gte=min_price)
 
         if max_price:
             queryset = queryset.filter(price__lte=max_price)
@@ -69,6 +82,13 @@ class Property(models.Model):
     agent = models.ForeignKey(
         'Agent',
         on_delete=models.SET_NULL,
+        related_name='properties',
+        blank=True,
+        null=True,
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
         related_name='properties',
         blank=True,
         null=True,
@@ -144,20 +164,34 @@ class PropertyImage(models.Model):
 
 class Agent(models.Model):
     name = models.CharField(max_length=255)
-    role = models.CharField(max_length=255, default='Senior Property Specialist')
+    role = models.CharField(
+        max_length=255,
+        default='Senior Property Specialist',
+    )
     phone = models.CharField(max_length=30)
     email = models.EmailField()
     image = models.ImageField(upload_to='agents/')
-    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.0)
+    linkedin = models.URLField(
+        blank=True,
+        null=True,
+        help_text='Enter the full LinkedIn profile URL, for example https://linkedin.com/in/name',
+    )
+    rating = models.DecimalField(
+        max_digits=2,
+        decimal_places=1,
+        default=5.0,
+    )
     reviews_count = models.PositiveIntegerField(default=0)
     bio = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['name']
+        verbose_name = 'Agent'
+        verbose_name_plural = 'Agents'
 
     def __str__(self):
-        return self.name
+        return f'{self.name} – {self.role}'
 
 
 class PropertyFeature(models.Model):
@@ -221,3 +255,62 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.subject}'
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='favorites',
+    )
+    property = models.ForeignKey(
+        Property,
+        on_delete=models.CASCADE,
+        related_name='favorited_by',
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'property'],
+                name='unique_user_property_favorite',
+            ),
+        ]
+
+    def __str__(self):
+        return f'{self.user} favorite {self.property}'
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='sent_messages',
+    )
+    receiver = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='received_messages',
+    )
+    property = models.ForeignKey(
+        Property,
+        on_delete=models.SET_NULL,
+        related_name='messages',
+        blank=True,
+        null=True,
+    )
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['receiver', '-created_at']),
+            models.Index(fields=['sender', '-created_at']),
+        ]
+
+    def __str__(self):
+        return f'{self.sender} -> {self.receiver}'

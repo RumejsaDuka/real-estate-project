@@ -12,9 +12,9 @@
   <div class="breadcrumb-bar">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="{% url 'index' %}" class="breadcrumb-link">Home</a>
+        <a href="{% url 'index' %}" class="breadcrumb-link">Kryefaqja</a>
         <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
-        <a href="{% url 'listings' %}" class="breadcrumb-link">Listings</a>
+        <a href="{% url 'listings' %}" class="breadcrumb-link">Pronat</a>
         <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
         <span class="breadcrumb-current">{{ property.title }}</span>
       </nav>
@@ -27,15 +27,15 @@
       <div class="property-hero-left">
         <div class="prop-badges">
           {% if property.badge %}
-            {% if property.badge == 'luxury' %}<span class="prop-badge prop-badge-luxury">Luxury</span>
-            {% elif property.badge == 'new' %}<span class="prop-badge prop-badge-new">New Listing</span>
-            {% elif property.badge == 'reduced' %}<span class="prop-badge prop-badge-reduced">Price Reduced</span>
+            {% if property.badge == 'luxury' %}<span class="prop-badge prop-badge-luxury">Luksoze</span>
+            {% elif property.badge == 'new' %}<span class="prop-badge prop-badge-new">E re</span>
+            {% elif property.badge == 'reduced' %}<span class="prop-badge prop-badge-reduced">Cmim i ulur</span>
             {% endif %}
           {% endif %}
           {% if property.listing_type == 'rent' %}
-            <span class="prop-badge prop-badge-rent">For Rent</span>
+            <span class="prop-badge prop-badge-rent">Me qira</span>
           {% else %}
-            <span class="prop-badge prop-badge-status">For Sale</span>
+            <span class="prop-badge prop-badge-status">Ne shitje</span>
           {% endif %}
         </div>
 
@@ -47,41 +47,52 @@
 
         <div class="property-quick-stats">
           <div class="quick-stat">
-            <i class="fas fa-bed"></i>
-            <span class="qs-value">{{ property.beds }}</span>
-            <span class="qs-label">Bedrooms</span>
+            <span class="quick-stat-icon"><i class="fas fa-bed"></i></span>
+            <span class="quick-stat-text">
+              <span class="qs-value">{{ property.beds }}</span>
+              <span class="qs-label">Dhoma</span>
+            </span>
           </div>
           <div class="qs-divider"></div>
           <div class="quick-stat">
-            <i class="fas fa-bath"></i>
-            <span class="qs-value">{{ property.baths }}</span>
-            <span class="qs-label">Bathrooms</span>
+            <span class="quick-stat-icon"><i class="fas fa-bath"></i></span>
+            <span class="quick-stat-text">
+              <span class="qs-value">{{ property.baths }}</span>
+              <span class="qs-label">Banjo</span>
+            </span>
           </div>
           <div class="qs-divider"></div>
           <div class="quick-stat">
-            <i class="fas fa-vector-square"></i>
-            <span class="qs-value">{{ property.sqft }}</span>
-            <span class="qs-label">Sqft</span>
+            <span class="quick-stat-icon"><i class="fas fa-vector-square"></i></span>
+            <span class="quick-stat-text">
+              <span class="qs-value">{{ property.sqft }}</span>
+              <span class="qs-label">Sqft</span>
+            </span>
           </div>
         </div>
       </div>
 
       <div class="property-hero-right">
         <span class="price-label">
-          {% if property.listing_type == 'rent' %}Monthly Rent{% else %}Asking Price{% endif %}
+          {% if property.listing_type == 'rent' %}Qira mujore{% else %}Cmimi{% endif %}
         </span>
         <div class="property-price">
-          ${{ property.price|floatformat:0 }}{% if property.listing_type == 'rent' %}<span class="price-period">/month</span>{% endif %}
+          ${{ property.price|floatformat:0 }}{% if property.listing_type == 'rent' %}<span class="price-period">/muaj</span>{% endif %}
         </div>
         <div class="property-actions">
-          <button class="action-btn" id="btnSave" aria-label="Save property">
-            <i class="far fa-heart"></i><span>Save</span>
-          </button>
+          <form method="post" action="{% url 'toggle_favorite' property.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+            <button class="action-btn {% if is_favorite %}saved{% endif %}" type="submit" aria-label="Ruaj pronen">
+              <i class="{% if is_favorite %}fas{% else %}far{% endif %} fa-heart"></i>
+              <span>{% if is_favorite %}E ruajtur{% else %}Ruaj{% endif %}</span>
+            </button>
+          </form>
           <button class="action-btn" id="btnShare" aria-label="Share property">
-            <i class="fas fa-share-nodes"></i><span>Share</span>
+            <i class="fas fa-share-nodes"></i><span>Ndaj</span>
           </button>
           <button class="action-btn" id="btnPrint" aria-label="Print listing">
-            <i class="fas fa-print"></i><span>Print</span>
+            <i class="fas fa-print"></i><span>Printo</span>
           </button>
         </div>
       </div>
@@ -90,7 +101,7 @@
 
   <!-- GALLERY -->
   <section class="gallery-section">
-    <div class="property-photo-showcase">
+    <div class="property-photo-showcase {% if gallery_photos|length == 1 %}single-photo{% endif %} reveal-on-scroll">
       <div class="gallery-main photo-feature" id="galleryMain">
         <img
           src="{{ gallery_photos.0.url }}"
@@ -104,6 +115,7 @@
         </div>
       </div>
 
+      {% if gallery_photos|length > 1 %}
       <div class="photo-tile-grid" aria-label="Property photo gallery">
         {% for photo in gallery_photos %}
         {% if not forloop.first %}
@@ -122,6 +134,7 @@
         {% endif %}
         {% endfor %}
       </div>
+      {% endif %}
     </div>
   </section>
 
@@ -131,49 +144,49 @@
       <div class="property-layout">
 
         <!-- TABS + PANELS -->
-        <div class="property-content">
+        <div class="property-content reveal-on-scroll">
           <div class="prop-tabs" id="propTabs">
-            <button class="prop-tab active" data-tab="overview">Overview</button>
-            <button class="prop-tab" data-tab="features">Features</button>
-            <button class="prop-tab" data-tab="location">Location</button>
+            <button class="prop-tab active" data-tab="overview">Permbledhje</button>
+            <button class="prop-tab" data-tab="features">Vecori</button>
+            <button class="prop-tab" data-tab="location">Vendndodhja</button>
           </div>
 
           <!-- Overview -->
           <div class="prop-tab-panel active" id="tab-overview">
             <div class="prop-section">
-              <h2 class="prop-section-title">Property Overview</h2>
+              <h2 class="prop-section-title">Permbledhje e prones</h2>
               <div class="overview-grid">
                 <div class="overview-item">
-                  <span class="ov-label">Listing Type</span>
-                  <span class="ov-value">{% if property.listing_type == 'rent' %}For Rent{% else %}For Sale{% endif %}</span>
+                  <span class="ov-label">Lloji</span>
+                  <span class="ov-value">{% if property.listing_type == 'rent' %}Me qira{% else %}Ne shitje{% endif %}</span>
                 </div>
                 <div class="overview-item">
-                  <span class="ov-label">Bedrooms</span>
+                  <span class="ov-label">Dhoma</span>
                   <span class="ov-value">{{ property.beds }}</span>
                 </div>
                 <div class="overview-item">
-                  <span class="ov-label">Bathrooms</span>
+                  <span class="ov-label">Banjo</span>
                   <span class="ov-value">{{ property.baths }}</span>
                 </div>
                 <div class="overview-item">
-                  <span class="ov-label">Area</span>
+                  <span class="ov-label">Siperfaqja</span>
                   <span class="ov-value">{{ property.sqft }} sqft</span>
                 </div>
               </div>
             </div>
 
             <div class="prop-section">
-              <h2 class="prop-section-title">About This Property</h2>
+              <h2 class="prop-section-title">Rreth kesaj prone</h2>
               <div class="prop-description">
                 {% if property.description %}
                   <p>{{ property.description }}</p>
                 {% else %}
-                  <p>This exceptional property at {{ property.location }} offers an outstanding living experience. With {{ property.beds }} bedrooms and {{ property.baths }} bathrooms across {{ property.sqft }} square feet, it represents one of the finest homes in the area.</p>
+                  <p>Kjo prone ne {{ property.location }} ofron nje eksperience te rehatshme banimi, me {{ property.beds }} dhoma dhe {{ property.baths }} banjo ne {{ property.sqft }} sqft.</p>
                   <p>
                     {% if property.listing_type == 'rent' %}
-                      Available for rent at ${{ property.price|floatformat:0 }}/month, this is a rare opportunity to enjoy premium living without compromise. Contact our specialists to arrange a private viewing.
+                      E disponueshme me qira per ${{ property.price|floatformat:0 }}/muaj. Kontaktoni pronarin per nje vizite.
                     {% else %}
-                      Listed at ${{ property.price|floatformat:0 }}, this property is an excellent opportunity whether you are looking for a primary residence or a premium investment. Contact our specialists today to schedule a private viewing.
+                      E listuar per ${{ property.price|floatformat:0 }}, kjo prone eshte mundesi e mire per banim ose investim.
                     {% endif %}
                   </p>
                 {% endif %}
@@ -184,21 +197,19 @@
           <!-- Features -->
           <div class="prop-tab-panel" id="tab-features">
             <div class="prop-section">
-              <h2 class="prop-section-title">Features &amp; Amenities</h2>
+              <h2 class="prop-section-title">Vecori dhe komoditete</h2>
               <ul class="features-list">
                 {% if property.features.all %}
                   {% for feat in property.features.all %}
                   <li><i class="fas fa-check"></i> {{ feat.feature }}</li>
                   {% endfor %}
                 {% else %}
-                  <li><i class="fas fa-check"></i> {{ property.beds }} spacious bedrooms</li>
-                  <li><i class="fas fa-check"></i> {{ property.baths }} modern bathrooms</li>
-                  <li><i class="fas fa-check"></i> {{ property.sqft }} sq ft of living space</li>
-                  <li><i class="fas fa-check"></i> Premium finishes throughout</li>
-                  <li><i class="fas fa-check"></i> Open-plan living areas</li>
-                  <li><i class="fas fa-check"></i> Modern kitchen with quality appliances</li>
-                  <li><i class="fas fa-check"></i> Private outdoor space</li>
-                  <li><i class="fas fa-check"></i> Dedicated parking</li>
+                  <li><i class="fas fa-check"></i> {{ property.beds }} dhoma te bollshme</li>
+                  <li><i class="fas fa-check"></i> {{ property.baths }} banjo moderne</li>
+                  <li><i class="fas fa-check"></i> {{ property.sqft }} sqft hapesire</li>
+                  <li><i class="fas fa-check"></i> Ambient i mirembajtur</li>
+                  <li><i class="fas fa-check"></i> Kuzhine funksionale</li>
+                  <li><i class="fas fa-check"></i> Parkim sipas disponueshmerise</li>
                 {% endif %}
               </ul>
             </div>
@@ -207,7 +218,7 @@
           <!-- Location -->
           <div class="prop-tab-panel" id="tab-location">
             <div class="prop-section">
-              <h2 class="prop-section-title">Location</h2>
+              <h2 class="prop-section-title">Vendndodhja</h2>
               <p class="prop-location-address">{{ property.location }}</p>
               <div class="map-placeholder">
                 <i class="fas fa-map-location-dot map-placeholder-icon"></i>
@@ -216,7 +227,7 @@
                    target="_blank" rel="noopener noreferrer"
                    class="map-open-btn">
                   <i class="fas fa-arrow-up-right-from-square"></i>
-                  Open in Google Maps
+                  Hap ne Google Maps
                 </a>
               </div>
             </div>
@@ -227,12 +238,12 @@
         <aside class="property-sidebar" id="propertySidebar">
 
           <!-- Agent Card -->
-          <div class="sidebar-card agent-card">
+          <div class="sidebar-card agent-card reveal-on-scroll">
             <div class="agent-top">
               {% if property.agent %}
                 <img src="{{ property.agent.image.url }}" alt="{{ property.agent.name }}" class="agent-avatar" />
                 <div class="agent-info">
-                  <p class="agent-role">Your Agent</p>
+                  <p class="agent-role">Kontakt</p>
                   <h3 class="agent-name">{{ property.agent.name }}</h3>
                   <p class="agent-title">{{ property.agent.role }}</p>
                   <div class="agent-rating">
@@ -243,7 +254,7 @@
               {% else %}
                 <img src="{% static 'images/agent1.jpg' %}" alt="James Harrington" class="agent-avatar" />
                 <div class="agent-info">
-                  <p class="agent-role">Your Agent</p>
+                  <p class="agent-role">Kontakt</p>
                   <h3 class="agent-name">James Harrington</h3>
                   <p class="agent-title">Senior Property Specialist</p>
                   <div class="agent-rating">
@@ -260,34 +271,55 @@
                 {% if property.agent %}{{ property.agent.phone }}{% else %}(310) 555-0192{% endif %}
               </a>
               <a href="{% url 'contact' %}" class="agent-btn agent-btn-email">
-                <i class="fas fa-envelope"></i> Send Message
+                <i class="fas fa-envelope"></i> Dergo mesazh
               </a>
             </div>
           </div>
 
+          <div class="sidebar-card reveal-on-scroll">
+            <h3 class="sidebar-card-title"><i class="fas fa-message"></i> Mesazh per pronen</h3>
+            {% if user.is_authenticated %}
+              {% if property.owner and property.owner != user %}
+                <form method="post" action="{% url 'send_property_message' property.id %}" class="simple-form">
+                  {% csrf_token %}
+                  {{ message_form.text }}
+                  {% if message_form.text.errors %}<div class="cf-error">{{ message_form.text.errors.0 }}</div>{% endif %}
+                  <button type="submit" class="calc-btn">Dergo mesazh</button>
+                </form>
+              {% elif property.owner == user %}
+                <p class="muted-text">Kjo prone eshte shtuar nga ju.</p>
+              {% else %}
+                <p class="muted-text">Mesazhet jane aktive per pronat qe kane pronar te regjistruar.</p>
+              {% endif %}
+            {% else %}
+              <p class="muted-text">Duhet te hyni ne llogari per te derguar mesazh.</p>
+              <a href="{% url 'login' %}?next={{ request.get_full_path }}" class="calc-btn">Hyr ne llogari</a>
+            {% endif %}
+          </div>
+
           <!-- Mortgage / Rent Calculator -->
-          <div class="sidebar-card mortgage-card">
+          <div class="sidebar-card mortgage-card reveal-on-scroll">
             <h3 class="sidebar-card-title">
               <i class="fas fa-calculator"></i>
-              {% if property.listing_type == 'rent' %}Rent Summary{% else %}Mortgage Calculator{% endif %}
+              {% if property.listing_type == 'rent' %}Permbledhje qiraje{% else %}Kalkulator kredie{% endif %}
             </h3>
             <div class="mortgage-fields">
               {% if property.listing_type == 'rent' %}
                 <div class="form-field">
-                  <label class="form-label">Monthly Rent</label>
+                  <label class="form-label">Qira mujore</label>
                   <input class="form-input" type="number" id="mortgagePrice" value="{{ property.price }}" readonly />
                 </div>
                 <div class="form-field">
-                  <label class="form-label">Annual Cost</label>
+                  <label class="form-label">Kosto vjetore</label>
                   <input class="form-input" type="text" id="annualCost" readonly />
                 </div>
               {% else %}
                 <div class="form-field">
-                  <label class="form-label" for="mortgagePrice">Home Price ($)</label>
+                    <label class="form-label" for="mortgagePrice">Cmimi ($)</label>
                   <input class="form-input" type="number" id="mortgagePrice" value="{{ property.price }}" />
                 </div>
                 <div class="form-field">
-                  <label class="form-label" for="mortgageDown">Down Payment ($)</label>
+                    <label class="form-label" for="mortgageDown">Parapagim ($)</label>
                   <input class="form-input" type="number" id="mortgageDown" value="0" />
                 </div>
                 <div class="form-row">
@@ -307,11 +339,11 @@
               {% endif %}
             </div>
             <button class="calc-btn" id="calcBtn">
-              {% if property.listing_type == 'rent' %}Calculate Annual Cost{% else %}Calculate Payment{% endif %}
+              {% if property.listing_type == 'rent' %}Llogarit koston vjetore{% else %}Llogarit pagesen{% endif %}
             </button>
             <div class="mortgage-result" id="mortgageResult">
               <span class="mortgage-monthly-label">
-                {% if property.listing_type == 'rent' %}Annual Rent Cost{% else %}Est. Monthly Payment{% endif %}
+                {% if property.listing_type == 'rent' %}Kosto vjetore{% else %}Pagese mujore e perafert{% endif %}
               </span>
               <span class="mortgage-monthly-amount" id="mortgageMonthly">-</span>
             </div>
@@ -326,38 +358,38 @@
   {% if similar_properties %}
   <section class="similar-section">
     <div class="container">
-      <p class="section-eyebrow">You May Also Like</p>
-      <h2 class="section-title">Similar Properties</h2>
+      <p class="section-eyebrow">Mund t'ju pelqejne</p>
+      <h2 class="section-title">Prona te ngjashme</h2>
       <div class="similar-grid">
         {% for sim in similar_properties %}
-        <article class="property-card" data-index="{{ forloop.counter0 }}">
+        <article class="property-card reveal-on-scroll" data-index="{{ forloop.counter0 }}">
           <div class="card-image-wrap">
             <img src="{{ sim.image.url }}" alt="{{ sim.title }}" class="card-image" loading="lazy" />
             <span class="card-badge {% if sim.badge == 'luxury' %}badge-luxury{% elif sim.badge == 'new' %}badge-new{% elif sim.badge == 'reduced' %}badge-reduced{% elif sim.listing_type == 'rent' %}badge-rent{% else %}badge-sale{% endif %}">
-              {% if sim.badge == 'luxury' %}Luxury{% elif sim.badge == 'new' %}New{% elif sim.badge == 'reduced' %}Reduced{% elif sim.listing_type == 'rent' %}For Rent{% else %}For Sale{% endif %}
+              {% if sim.badge == 'luxury' %}Luksoze{% elif sim.badge == 'new' %}E re{% elif sim.badge == 'reduced' %}Cmim i ulur{% elif sim.listing_type == 'rent' %}Me qira{% else %}Ne shitje{% endif %}
             </span>
             <div class="card-overlay">
-              <a href="{% url 'property_detail' sim.id %}" class="card-overlay-btn">Quick View</a>
+              <a href="{% url 'property_detail' sim.id %}" class="card-overlay-btn">Shiko</a>
             </div>
           </div>
           <div class="card-body">
             <div class="card-price">
-              ${{ sim.price|floatformat:0 }}{% if sim.listing_type == 'rent' %}<span class="card-price-period">/month</span>{% endif %}
+              ${{ sim.price|floatformat:0 }}{% if sim.listing_type == 'rent' %}<span class="card-price-period">/muaj</span>{% endif %}
             </div>
             <h3 class="card-title">{{ sim.title }}</h3>
             <p class="card-location"><i class="fas fa-map-marker-alt"></i> {{ sim.location }}</p>
             <div class="card-meta">
-              <span class="meta-item"><i class="fas fa-bed"></i> {{ sim.beds }} Beds</span>
+              <span class="meta-item"><i class="fas fa-bed"></i> {{ sim.beds }} dhoma</span>
               <span class="meta-sep"></span>
-              <span class="meta-item"><i class="fas fa-bath"></i> {{ sim.baths }} Baths</span>
+              <span class="meta-item"><i class="fas fa-bath"></i> {{ sim.baths }} banjo</span>
             </div>
-            <a href="{% url 'property_detail' sim.id %}" class="card-btn">View Details</a>
+            <a href="{% url 'property_detail' sim.id %}" class="card-btn">Detajet</a>
           </div>
         </article>
         {% endfor %}
       </div>
       <div class="similar-cta">
-        <a href="{% url 'listings' %}" class="btn-navy">View All Listings</a>
+        <a href="{% url 'listings' %}" class="btn-navy">Shiko te gjitha</a>
       </div>
     </div>
   </section>

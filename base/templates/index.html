@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %}Grand Realty - Find Your Perfect Home{% endblock %}
+{% block title %}Grand Realty - Gjej pronen ideale{% endblock %}
 {% block navbar_class %}{% endblock %}
 {% block nav_home %}active{% endblock %}
 
@@ -18,13 +18,13 @@
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Premium Properties</p>
-      <h1 class="hero-title">Find Your<br /><span class="hero-accent">Dream Home</span></h1>
-      <p class="hero-subtitle">We help you find the best houses, apartments and villas at the best prices.</p>
+      <p class="hero-eyebrow">Prona premium</p>
+      <h1 class="hero-title">Gjej pronen<br /><span class="hero-accent">ideale</span></h1>
+      <p class="hero-subtitle">Shfleto shtepi, apartamente dhe vila me cmime te qarta dhe filtra te shpejte.</p>
     </div>
     <div class="hero-scroll-indicator">
       <span class="scroll-line"></span>
-      <span class="scroll-text">Scroll</span>
+      <span class="scroll-text">Shfleto</span>
     </div>
   </section>
 
@@ -32,9 +32,9 @@
   <section class="featured-section" id="featured">
     <div class="container">
       <div class="section-header">
-        <p class="section-eyebrow">Handpicked for You</p>
-        <h2 class="section-title">Featured Properties</h2>
-        <p class="section-subtitle">A curated selection of our finest available homes across the country.</p>
+        <p class="section-eyebrow">Te perzgjedhura</p>
+        <h2 class="section-title">Prona te vecuara</h2>
+        <p class="section-subtitle">Zgjedhje e shpejte e pronave me te mira te disponueshme.</p>
       </div>
 
       <div class="properties-grid">
@@ -52,30 +52,30 @@
               {% elif prop.badge == 'new' %}badge-new
               {% elif prop.badge == 'reduced' %}badge-reduced
               {% endif %}">
-              {% if prop.badge == 'sale' %}For Sale
-              {% elif prop.badge == 'luxury' %}Luxury
-              {% elif prop.badge == 'new' %}New
-              {% elif prop.badge == 'reduced' %}Reduced
+              {% if prop.badge == 'sale' %}Ne shitje
+              {% elif prop.badge == 'luxury' %}Luksoze
+              {% elif prop.badge == 'new' %}E re
+              {% elif prop.badge == 'reduced' %}Cmim i ulur
               {% endif %}
             </span>
             <div class="card-overlay">
-              <a href="{% url 'property_detail' prop.id %}" class="card-overlay-btn">Quick View</a>
+              <a href="{% url 'property_detail' prop.id %}" class="card-overlay-btn">Shiko</a>
             </div>
           </div>
           <div class="card-body">
-            <div class="card-price">${{ prop.price|floatformat:0 }}{% if prop.listing_type == 'rent' %}<span class="card-price-period">/month</span>{% endif %}</div>
+            <div class="card-price">${{ prop.price|floatformat:0 }}{% if prop.listing_type == 'rent' %}<span class="card-price-period">/muaj</span>{% endif %}</div>
             <h3 class="card-title">{{ prop.title }}</h3>
             <p class="card-location">
               <i class="fas fa-map-marker-alt"></i> {{ prop.location }}
             </p>
             <div class="card-meta">
-              <span class="meta-item"><i class="fas fa-bed"></i> {{ prop.beds }} Beds</span>
+              <span class="meta-item"><i class="fas fa-bed"></i> {{ prop.beds }} dhoma</span>
               <span class="meta-sep"></span>
-              <span class="meta-item"><i class="fas fa-bath"></i> {{ prop.baths }} Baths</span>
+              <span class="meta-item"><i class="fas fa-bath"></i> {{ prop.baths }} banjo</span>
               <span class="meta-sep"></span>
               <span class="meta-item"><i class="fas fa-vector-square"></i> {{ prop.sqft|floatformat:0 }} sqft</span>
             </div>
-            <a href="{% url 'property_detail' prop.id %}" class="card-btn">View Details</a>
+            <a href="{% url 'property_detail' prop.id %}" class="card-btn">Detajet</a>
           </div>
         </article>
         {% endfor %}
@@ -91,12 +91,12 @@
     </div>
     <div class="container cta-content">
       <div class="cta-inner">
-        <p class="section-eyebrow" style="color: var(--gold);">Ready to Move?</p>
-        <h2 class="cta-title">Explore All Available<br />Properties</h2>
-        <p class="cta-subtitle">Browse our complete portfolio of over 1,200 listings across the country. Your perfect home is waiting.</p>
+        <p class="section-eyebrow" style="color: var(--gold);">Gati per hapin tjeter?</p>
+        <h2 class="cta-title">Shfleto te gjitha<br />pronat</h2>
+        <p class="cta-subtitle">Kerko sipas titullit, vendndodhjes dhe cmimit per te gjetur shpejt pronen qe te pershtatet.</p>
         <div class="cta-actions">
-          <a href="{% url 'listings' %}" class="btn btn-gold">Browse All Listings</a>
-          <a href="{% url 'contact' %}" class="btn btn-outline-white">Talk to an Agent</a>
+          <a href="{% url 'listings' %}" class="btn btn-gold">Shfleto pronat</a>
+          <a href="{% url 'property_create' %}" class="btn btn-outline-white">Shto prone</a>
         </div>
       </div>
     </div>
