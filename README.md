@@ -111,7 +111,7 @@ python manage.py test
 
 ## Struktura kryesore
 
-```text
+```text 
 base/
   models.py       Modelet: Property, Favorite, Message, Agent
   views.py        Logjika e faqeve
